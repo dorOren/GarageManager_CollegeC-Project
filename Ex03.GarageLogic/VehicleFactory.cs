@@ -20,7 +20,7 @@ namespace Ex03.GarageLogic
         public Vehicle CreateVehicle(string i_VehicleType,
             string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,
             float RemainingEnergySource)
-        {sdfs
+        {
             if (nameof(eVehicleType.FuelBasedCar).Equals(i_VehicleType))
             {
                // return new FuelBasedCar();
