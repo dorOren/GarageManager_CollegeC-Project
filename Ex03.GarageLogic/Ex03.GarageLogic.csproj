@@ -36,18 +36,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerData.cs" />
     <Compile Include="CustomersDetailsBook.cs" />
+    <Compile Include="Enums\eLicenseType.cs" />
+    <Compile Include="Enums\eVehicleStatus.cs" />
     <Compile Include="Enums\eColor.cs" />
     <Compile Include="Enums\eFuelType.cs" />
     <Compile Include="ElectricVehicles\ElectricCar.cs" />
     <Compile Include="ElectricVehicles\ElectricMotorcycle.cs" />
     <Compile Include="ElectricVehicles\ElectricVehicle.cs" />
+    <Compile Include="Enums\eVehicleType.cs" />
     <Compile Include="FuelBasedVehicles\FuelBasedCar.cs" />
     <Compile Include="FuelBasedVehicles\FuelBasedMotorcycle.cs" />
     <Compile Include="FuelBasedVehicles\FuelBasedVehicle.cs" />
     <Compile Include="FuelBasedVehicles\Truck.cs" />
     <Compile Include="GarageManager.cs" />
-    <Compile Include="ValueOutOfRangeException.cs" />
+    <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleFactory.cs" />
     <Compile Include="Wheel.cs" />

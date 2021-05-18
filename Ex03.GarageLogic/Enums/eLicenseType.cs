@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex03.GarageLogic
+namespace Ex03.GarageLogic.Enums
 {
-    public enum eFuelType
+    public enum eLicenseType
     {
         None,
-        Octan95,
-        Octan96,
-        Octan98,
-        Soler
+        A,
+        B1,
+        AA,
+        BB
     }
 }

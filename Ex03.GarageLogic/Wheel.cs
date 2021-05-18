@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    class Wheel
+    public class Wheel
     {
         public string Manufacturer { get; }
         public float CurrentAirPressure { get; set; }
@@ -24,12 +25,18 @@ namespace Ex03.GarageLogic
             float predictedAirPressure = i_HowMuchToAdd + CurrentAirPressure;
             if (predictedAirPressure > MaxAirPressure)
             {
-                //throw ValueOutOfRangeException.E
+                string error = $"Cannot add {i_HowMuchToAdd} air pressure, air pressure's maximum value is {MaxAirPressure}";
+                throw new ValueOutOfRangeException(error, MaxAirPressure);
             }
             else
             {
                 CurrentAirPressure += i_HowMuchToAdd;
             }
+        }
+
+        public void InflateToMax()
+        {
+            CurrentAirPressure = MaxAirPressure;
         }
     }
 }

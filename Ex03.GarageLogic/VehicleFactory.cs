@@ -3,46 +3,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    class VehicleFactory
+    public class VehicleFactory
     {
-        enum eVehicleType
+        
+
+        public Vehicle CreateVehicle(
+            eVehicleType i_VehicleType,                                                     // What to create
+            string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,          // Vehicle class info
+            string i_WheelManufacturer, float i_WheelCurrentAirPressure,                    // Vehicle's wheels info
+            eFuelType i_FuelType, float i_RemainingFuelAmount,                              // FuelBased Vehicle info
+            float i_RemainingBatteryTime,                                                   // Electric Vehicle info
+            eColor i_Color, int i_NumberOfDoors,                                            // Car info
+            eLicenseType i_LicenseType, int i_EngineVolume,                                 // Motorcycle info
+            bool i_IsCarryingDangerousMaterials, float i_MaxCarryWeight                     // Truck info
+        )
         {
-            FuelBasedCar,
-            FuelBasedMotorcycle,
-            Truck,
-            ElecticCar,
-            ElectricMotorcycle
-        }
-
-        public Vehicle CreateVehicle(string i_VehicleType,
-            string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,
-            float RemainingEnergySource)
-        {
-            if (nameof(eVehicleType.FuelBasedCar).Equals(i_VehicleType))
+            Object newVehicle = new object();
+            switch (i_VehicleType)
             {
-               // return new FuelBasedCar();
-            }
-            else if (nameof(eVehicleType.FuelBasedMotorcycle).Equals(i_VehicleType))
-            {
+                case eVehicleType.FuelBasedCar:
+                    newVehicle= new FuelBasedCar(
+                        i_Model, i_RegistrationNumber, i_EnergyPercentage,
+                        i_RemainingFuelAmount,i_Color,i_NumberOfDoors,
+                        i_WheelManufacturer,i_WheelCurrentAirPressure);
+                    break;
+                    
+                case eVehicleType.FuelBasedMotorcycle:
+                    newVehicle= new FuelBasedMotorcycle(
+                        i_Model, i_RegistrationNumber, i_EnergyPercentage,
+                        i_RemainingFuelAmount, i_LicenseType, i_EngineVolume,
+                        i_WheelManufacturer, i_WheelCurrentAirPressure);
+                    break;
+
+                case eVehicleType.Truck:
+                    newVehicle = new Truck(
+                        i_Model, i_RegistrationNumber, i_EnergyPercentage,
+                        i_RemainingFuelAmount, i_IsCarryingDangerousMaterials, i_MaxCarryWeight,
+                        i_WheelManufacturer, i_WheelCurrentAirPressure);
+                    break;
+
+                case eVehicleType.ElecticCar:
+                    newVehicle = new ElectricCar(
+                        i_Model, i_RegistrationNumber, i_EnergyPercentage,
+                        i_RemainingBatteryTime, i_Color, i_NumberOfDoors,
+                        i_WheelManufacturer, i_WheelCurrentAirPressure);
+                    break;
+
+                case eVehicleType.ElectricMotorcycle:
+                    newVehicle = new ElectricMotorcycle(
+                        i_Model, i_RegistrationNumber, i_EnergyPercentage,
+                        i_RemainingBatteryTime, i_LicenseType, i_EngineVolume,
+                        i_WheelManufacturer, i_WheelCurrentAirPressure);
+                    break;
 
             }
-            else if (nameof(eVehicleType.Truck).Equals(i_VehicleType))
-            {
 
-            }
-            else if (nameof(eVehicleType.ElecticCar).Equals(i_VehicleType))
-            {
-
-            }
-            else if (nameof(eVehicleType.ElectricMotorcycle).Equals(i_VehicleType))
-            {
-
-            }
-
-
+            return newVehicle as Vehicle;
         }
     }
 }

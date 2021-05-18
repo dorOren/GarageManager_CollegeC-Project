@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    class FuelBasedVehicle : Vehicle
+    public class FuelBasedVehicle : Vehicle
     {
         public eFuelType FuelType { get; set; }
         public float RemainingFuelAmount { get; set; }
@@ -22,12 +23,13 @@ namespace Ex03.GarageLogic
             RemainingFuelAmount = i_RemainingFuelAmount;
         }
 
-        public void FeulVehicle(float i_NumberOfLitersToAdd)
+        public void FuelVehicle(float i_NumberOfLitersToAdd)
         {
             float predictedFuelAmount = i_NumberOfLitersToAdd + RemainingFuelAmount;
             if (predictedFuelAmount > MaxFuelAmount)
             {
-                //throw ValueOutOfRangeException.
+                string error = $"Cannot add {i_NumberOfLitersToAdd} liters, fuel maximum value is {MaxFuelAmount}";
+                throw new ValueOutOfRangeException(error, MaxFuelAmount);
             }
             else
             {

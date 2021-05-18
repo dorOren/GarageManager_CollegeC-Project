@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    class ElectricalVehicle : Vehicle
+    public class ElectricVehicle : Vehicle
     {
         public float RemainingBatteryTime { get; set; }
         public float MaxBatteryTime { get; }
 
-        public ElectricalVehicle(string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,
+        public ElectricVehicle(string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,
             float i_RemainingBatteryTime, float i_MaxBatteryTime)
             : base(i_Model, i_RegistrationNumber, i_EnergyPercentage)
         {
@@ -25,7 +26,8 @@ namespace Ex03.GarageLogic
             float predictedBatteryTime = i_Hours + RemainingBatteryTime;
             if (predictedBatteryTime > MaxBatteryTime)
             {
-                //throw ValueOutOfRangeException.
+                string error = $"Cannot add {i_Hours} hours of battery time, maximum hours of battery time is {MaxBatteryTime}";
+                throw new ValueOutOfRangeException(error, MaxBatteryTime);
             }
             else
             {

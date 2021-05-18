@@ -35,5 +35,16 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Please enter the desired fuel amount");
         }
+
+
+        public static void AskToChooseVehicleType()
+        {
+            Console.WriteLine("Please choose the desired vehicle type");
+        }
+
+        public static void AskForColor()
+        {
+            Console.WriteLine("Choose the car's color");
+        }
     }
 }

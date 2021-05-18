@@ -10,46 +10,72 @@ namespace Ex03.ConsoleUI
     {
         public static void ShowMainMenu()
         {
-            Console.WriteLine("=============================================================");
-            Console.WriteLine("1. Log new vehicle to the garage");
-            Console.WriteLine("2. Show all license numbers of vehicle currently in the garage"); // done
-            Console.WriteLine("3. Update vehicle state"); // done
-            Console.WriteLine("4. Inflate wheels (to maximum)"); // done
-            Console.WriteLine("5. Fuel vehicle");
-            Console.WriteLine("6. Charge a vehicle");
-            Console.WriteLine("7. Show full vehicle data");
-            Console.WriteLine("8. Exit garage system");
-            Console.WriteLine("=============================================================");
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("================================================").AppendLine()
+                .Append("1. Log new vehicle to the garage").AppendLine()
+                .Append("2. Show all license numbers of vehicle currently in the garage").AppendLine()
+                .Append("3. Update vehicle state").AppendLine().Append("4. Inflate wheels (to maximum)").AppendLine()
+                .Append("5. Fuel vehicle").AppendLine().Append("6. Charge a vehicle").AppendLine()
+                .Append("7. Show full vehicle data").AppendLine().Append("8. Exit garage system")
+                .AppendLine()
+                .Append("================================================");
+            Console.WriteLine(sb);
         }
 
         public static void ShowFilteringOptionsByVehicleStatusMenu()
         {
-            Console.WriteLine("=============================================================");
-            Console.WriteLine("1. Show in status 'Paid'"); // done
-            Console.WriteLine("2. Show in status 'In Repair'"); // done
-            Console.WriteLine("3. Show in status 'Repaired'"); // done
-            Console.WriteLine("4. Show all"); // done
-            Console.WriteLine("5. Go back"); // done
-            Console.WriteLine("=============================================================");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("================================================").AppendLine()
+                .Append("1. Show in status 'Paid").AppendLine()
+                .Append("2. Show in status 'In Repair'").AppendLine()
+                .Append("3. Show in status 'Repaired'").AppendLine()
+                .Append("4. Show all").AppendLine()
+                .Append("5. Go back").AppendLine()
+                .Append("================================================");
+            Console.WriteLine(sb);
         }
 
         public static void ShowVehicleStatusOptions()
         {//TODO: Convert to eStatus.XX.ToString()
-            Console.WriteLine("=============================================================");
-            Console.WriteLine("1. Paid"); // done
-            Console.WriteLine("2. In Repair"); // done
-            Console.WriteLine("3. Repaired"); // done
-            Console.WriteLine("4. Go back"); // done
-            Console.WriteLine("=============================================================");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("================================================").AppendLine()
+                .Append("1. 'Paid").AppendLine()
+                .Append("2. 'In Repair'").AppendLine()
+                .Append("3. 'Repaired'").AppendLine()
+                .Append("4. Go back").AppendLine()
+                .Append("================================================");
+            Console.WriteLine(sb);
         }
 
         public static void ShowFuelTypes()
         {// TODO: Convert to eFuelTypes.XX.ToString()
-            Console.WriteLine("1. Soler");
-            Console.WriteLine("2. Octan 95");
-            Console.WriteLine("3. Octan 96");
-            Console.WriteLine("4. Octan 98");
-            Console.WriteLine("5. Go back");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("================================================").AppendLine()
+                .Append("1. Soler").AppendLine()
+                .Append("2. Octan 95").AppendLine()
+                .Append("3. Octan 96").AppendLine()
+                .Append("4. Octan 98").AppendLine()
+                .Append("5. Go back").AppendLine()
+                .Append("================================================");
+            Console.WriteLine(sb);
+        }
+
+        public static void ShowPossibleVehicleTypes()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("================================================").AppendLine().Append("1. Motorcycle")
+                .AppendLine().Append("2. Electrical Motorcycle").AppendLine().Append("3. Car").AppendLine()
+                .Append("4. Electrical Car").AppendLine().Append("5. Truck").AppendLine()
+                .Append("================================================");
+        }
+
+        public static void ShowColorsOptionsForCars()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("================================================").AppendLine()
+                .Append("1. Res").AppendLine().Append("2. White").AppendLine().Append("3. Black").AppendLine()
+                .Append("4. Silver").AppendLine().Append("================================================");
         }
     }
 }

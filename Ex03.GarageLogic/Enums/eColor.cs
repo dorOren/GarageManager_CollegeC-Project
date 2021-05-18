@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    enum eColor
+    public enum eColor
     {
+        None,
         Red,
         White,
         Black,
