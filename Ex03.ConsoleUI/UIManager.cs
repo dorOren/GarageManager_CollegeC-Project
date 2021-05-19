@@ -70,27 +70,66 @@ namespace Ex03.ConsoleUI
             eVehicleType vehicleType = getChosenVehicletypeAsEnum();
             string modelName = InputHandler.GetStringInputFromUser();
             string LicenseNumber = InputHandler.GetStringInputFromUser();
-
-            if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) || vehicleType.Equals(eVehicleType.ElectricMotorcycle))
+            if(m_Garage.FindVehicleInGarage(LicenseNumber) != null)
             {
-                eLicenseType licenseType = getMotorCycleLicenseType();
-                int engineVolume = InputHandler.GetIntegerInputFromUser();
-                GarageManager.AddMotorcycle(vehicleType, modelName, LicenseNumber, licenseType, engineVolume);
+                // TODO: change status to "in repair" and return to main menu.
             }
-            else if (vehicleType.Equals(eVehicleType.Car) || vehicleType.Equals(eVehicleType.ElectricCar))
+            else
             {
-                eColor chosenColor = getColorFromUser();
-                int numDoors = getNumberOfDoorsFromUSer();
-                GarageManager.AddCar(vehicleType, modelName, LicenseNumber, chosenColor, numDoors);
+                Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
+                if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) || vehicleType.Equals(eVehicleType.ElectricMotorcycle))
+                {
+                    eLicenseType licenseType = getMotorCycleLicenseType();
+                    int engineVolume = InputHandler.GetIntegerInputFromUser();
+                    GarageManager.SetMotorcycle(vehicle, vehicleType, modelName, LicenseNumber, licenseType, engineVolume);
+                }
+                else if (vehicleType.Equals(eVehicleType.FuelBasedCar) || vehicleType.Equals(eVehicleType.ElectricCar))
+                {
+                    eColor chosenColor = getColorFromUser();
+                    int numDoors = getNumberOfDoorsFromUSer();
+                    GarageManager.SetFuelBasedCar(vehicle, vehicleType, modelName, LicenseNumber, chosenColor, numDoors);
+                }
+                else if (vehicleType.Equals(eVehicleType.Truck))
+                {
+                    bool isCarryingDangerousCargo = InputHandler.GetBooleanInputFromUser();
+                    float maxCarryingWeight = InputHandler.GetFloatInputFromUser();
+                    GarageManager.SetTruck(vehicle, vehicleType, modelName, LicenseNumber, isCarryingDangerousCargo, maxCarryingWeight);
+                }
+                // TODO: get owner details and send to GarageManager to insert to phonebook.
             }
-            else if (vehicleType.Equals(eVehicleType.Truck))
+            
+
+            
+            
+            
+
+        }
+
+        private eLicenseType getMotorCycleLicenseType()
+        {
+            PrintHandler.AskForMotorcycleLicenseType();
+            Menu.ShowMotorcycleLicenseTypes();
+            int chosenType = InputHandler.GetChosenOptionInMenuFromUser();
+            eLicenseType resLicenseType = eLicenseType.None;
+            switch(chosenType)
             {
-                bool isCarryingDangerousCargo = InputHandler.GetBooleanInputFromUser();
-                float maxCarryingWeight = InputHandler.GetFloatInputFromUser();
-                GarageManager.AddTruck(vehicleType, modelName, LicenseNumber, isCarryingDangerousCargo, maxCarryingWeight);
+                case 1:
+                    resLicenseType = eLicenseType.A;
+                    break;
+                case 2:
+                    resLicenseType = eLicenseType.B1;
+                    break;
+                case 3:
+                    resLicenseType = eLicenseType.AA;
+                    break;
+                case 4:
+                    resLicenseType = eLicenseType.BB;
+                    break;
+                default:
+                    PrintHandler.IllegalOptionOutput();
+                    break;
             }
-
-
+            return resLicenseType;
         }
 
         private int getNumberOfDoorsFromUSer()

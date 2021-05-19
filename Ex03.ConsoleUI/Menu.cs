@@ -77,5 +77,12 @@ namespace Ex03.ConsoleUI
                 .Append("1. Res").AppendLine().Append("2. White").AppendLine().Append("3. Black").AppendLine()
                 .Append("4. Silver").AppendLine().Append("================================================");
         }
+
+        public static void ShowMotorcycleLicenseTypes()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("1. A").AppendLine().Append("2. B1").AppendLine().Append("3. AA").AppendLine().Append("4. BB")
+                .AppendLine();
+        }
     }
 }

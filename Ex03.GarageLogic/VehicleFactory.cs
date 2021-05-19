@@ -46,7 +46,7 @@ namespace Ex03.GarageLogic
                         i_WheelManufacturer, i_WheelCurrentAirPressure);
                     break;
 
-                case eVehicleType.ElecticCar:
+                case eVehicleType.ElectricCar:
                     newVehicle = new ElectricCar(
                         i_Model, i_RegistrationNumber, i_EnergyPercentage,
                         i_RemainingBatteryTime, i_Color, i_NumberOfDoors,

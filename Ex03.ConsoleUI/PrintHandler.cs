@@ -46,5 +46,10 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Choose the car's color");
         }
+
+        public static void AskForMotorcycleLicenseType()
+        {
+            Console.WriteLine("Choose license type");
+        }
     }
 }
