@@ -51,5 +51,10 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Choose license type");
         }
+
+        public static void VehicleIsAlreadyExistsInGarage()
+        {
+            Console.WriteLine("Cannot add the desired Vehicle, as it's already exists in the garage. Current status is: in repair.");
+        }
     }
 }

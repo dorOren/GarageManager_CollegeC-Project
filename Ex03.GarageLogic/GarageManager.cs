@@ -244,19 +244,36 @@ namespace Ex03.GarageLogic
 
         public Vehicle InitVehicle(eVehicleType i_VehicleType)
         {
-            
+            return m_Factory.CreateVehicle(i_VehicleType);
         }
-
-        public static void SetMotorcycle(Vehicle i_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber, eLicenseType i_LicenseType, int i_EngineVolume)
+        public void AddCustomerDetailsToBook(string i_OwnerName, string i_OwnerPhoneNumber, string i_RegistrationNumber)
+        {
+            if (!m_Book.FindKey(i_RegistrationNumber))
+            {
+                m_Book.AddCustomer(i_RegistrationNumber, i_OwnerName, i_OwnerPhoneNumber);
+            }
+        }
+        
+        public void SetMotorcycle(Vehicle i_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber, eLicenseType i_LicenseType, int i_EngineVolume)
         {
             switch(i_VehicleType)
             {
-                
+                case eVehicleType.ElectricMotorcycle:
+                    ElectricMotorcycle electricMotorcycle = (i_Vehicle as ElectricMotorcycle);
+                    electricMotorcycle.Model = i_ModelName;
+                    break;
+                                                            
+
             }
             if (i_VehicleType.Equals(eVehicleType.FuelBasedMotorcycle))
             {
                 FuelBasedMotorcycle.SetFields(i_ModelName, i_LicenseNumber, i_LicenseType, i_EngineVolume);
             }
+        }
+
+        public void UpdateVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewStatus)
+        {
+            
         }
     }
 }
