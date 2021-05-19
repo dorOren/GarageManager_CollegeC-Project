@@ -10,6 +10,7 @@ namespace Ex03.GarageLogic
 {
     public struct  CustomerData
     {
+
         public string OwnerName
         {
             get;
@@ -25,6 +26,11 @@ namespace Ex03.GarageLogic
             get;
             set;
         }
-
+        public CustomerData(string i_OwnerName, string i_OwnerPhone)
+        {
+            OwnerName = i_OwnerName;
+            OwnerPhone = i_OwnerPhone;
+            VehicleStatus = eVehicleStatus.BeingRepaired;
+        }
     }
 }

@@ -9,9 +9,40 @@ namespace Ex03.GarageLogic
 {
     public class VehicleFactory
     {
-        
 
-        public Vehicle CreateVehicle(
+        public Vehicle CreateVehicle(eVehicleType i_VehicleType)
+        {
+            Object newVehicle = new object();
+            switch (i_VehicleType)
+            {
+                case eVehicleType.FuelBasedCar:
+                    newVehicle= new FuelBasedCar();
+                    break;
+                    
+                case eVehicleType.FuelBasedMotorcycle:
+                    newVehicle= new FuelBasedMotorcycle();
+                    break;
+
+                case eVehicleType.Truck:
+                    newVehicle = new Truck();
+                    break;
+
+                case eVehicleType.ElectricCar:
+                    newVehicle = new ElectricCar();
+                    break;
+
+                case eVehicleType.ElectricMotorcycle:
+                    newVehicle = new ElectricMotorcycle();
+                    break;
+
+            }
+
+            return newVehicle as Vehicle;
+        }
+    }
+}
+/*
+  public Vehicle CreateVehicle(
             eVehicleType i_VehicleType,                                                     // What to create
             string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,          // Vehicle class info
             string i_WheelManufacturer, float i_WheelCurrentAirPressure,                    // Vehicle's wheels info
@@ -65,4 +96,4 @@ namespace Ex03.GarageLogic
             return newVehicle as Vehicle;
         }
     }
-}
+*/

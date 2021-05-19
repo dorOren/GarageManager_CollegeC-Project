@@ -21,14 +21,20 @@ namespace Ex03.GarageLogic
             m_VehiclesInGarage = new List<Vehicle>();
         }
 
-        /*
-        TODO:public void AddNewVehicle(string i_OwnerName, string i_OwnerNumber, eVehicleStatus,
-            )
-        {
         
-
+        public Vehicle VehicleInit(eVehicleType i_VehicleType)
+        {
+            return m_Factory.CreateVehicle(i_VehicleType);
         }
-        */
+
+        public void AddCustomerDetailsToBook(string i_OwnerName, string i_OwnerPhoneNumber, string i_RegistrationNumber)
+        {
+            if (!m_Book.findKey(i_RegistrationNumber))
+            {
+                m_Book.AddCustomer(i_RegistrationNumber, i_OwnerName, i_OwnerPhoneNumber);
+            }
+        }
+        
 
         public Vehicle FindVehicleInGarage(string i_RegistrationNumber)
         {
@@ -242,21 +248,5 @@ namespace Ex03.GarageLogic
             return data;
         }
 
-        public Vehicle InitVehicle(eVehicleType i_VehicleType)
-        {
-            
-        }
-
-        public static void SetMotorcycle(Vehicle i_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber, eLicenseType i_LicenseType, int i_EngineVolume)
-        {
-            switch(i_VehicleType)
-            {
-                
-            }
-            if (i_VehicleType.Equals(eVehicleType.FuelBasedMotorcycle))
-            {
-                FuelBasedMotorcycle.SetFields(i_ModelName, i_LicenseNumber, i_LicenseType, i_EngineVolume);
-            }
-        }
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="ElectricVehicles\ElectricMotorcycle.cs" />
     <Compile Include="ElectricVehicles\ElectricVehicle.cs" />
     <Compile Include="Enums\eVehicleType.cs" />
+    <Compile Include="Exceptions\IllegalRequestException.cs" />
     <Compile Include="FuelBasedVehicles\FuelBasedCar.cs" />
     <Compile Include="FuelBasedVehicles\FuelBasedMotorcycle.cs" />
     <Compile Include="FuelBasedVehicles\FuelBasedVehicle.cs" />
