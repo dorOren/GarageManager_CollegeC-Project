@@ -256,11 +256,19 @@ namespace Ex03.GarageLogic
         
         public void SetMotorcycle(Vehicle i_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber, eLicenseType i_LicenseType, int i_EngineVolume)
         {
-            switch(i_VehicleType)
+            
+            ElectricMotorcycle electricMotorcycle = (i_Vehicle as ElectricMotorcycle);
+            electricMotorcycle.LicenseType = i_LicenseType;
+            electricMotorcycle.EngineVolume = i_EngineVolume;
+            electricMotorcycle.Model = i_ModelName;
+            electricMotorcycle.RegistrationNumber = i_LicenseNumber;
+            SetMotorcycleWheelsArray(i_Vehicle);
+            switch (i_VehicleType)
             {
                 case eVehicleType.ElectricMotorcycle:
-                    ElectricMotorcycle electricMotorcycle = (i_Vehicle as ElectricMotorcycle);
-                    electricMotorcycle.Model = i_ModelName;
+                   
+                    
+                    
                     break;
                                                             
 
