@@ -87,14 +87,14 @@ namespace Ex03.ConsoleUI
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
                 .Append("1. Res").AppendLine().Append("2. White").AppendLine().Append("3. Black").AppendLine()
-                .Append("4. Silver").AppendLine().Append("================================================");
+                .Append("4. Silver").AppendLine().Append("5. Go back").AppendLine().Append("================================================");
         }
 
         public static void ShowMotorcycleLicenseTypes()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("1. A").AppendLine().Append("2. B1").AppendLine().Append("3. AA").AppendLine().Append("4. BB")
-                .AppendLine();
+            sb.Append("1. A").AppendLine().Append("2. B1").AppendLine().Append("3. AA").AppendLine().Append("4. BB").AppendLine()
+                .Append("5. Go back").AppendLine();
         }
     }
 }

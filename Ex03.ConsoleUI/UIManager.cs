@@ -66,7 +66,7 @@ namespace Ex03.ConsoleUI
 
         private void getNewVehicleDetails()
         {
-
+            PrintHandler.AskForLicenseNumber();
             string licenseNumber = InputHandler.GetStringInputFromUser();
 
             if (isVehicleExistsInGarage(licenseNumber))
@@ -77,69 +77,250 @@ namespace Ex03.ConsoleUI
             else
             {
                 eVehicleType vehicleType = getChosenVehicleTypeAsEnum();
-                string modelName = InputHandler.GetStringInputFromUser();
-                float currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
-                PrintHandler.AskForWheelManufacturer();
-                string wheelManufacturer = InputHandler.GetStringInputFromUser();
-                Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
-                if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) ||
-                    vehicleType.Equals(eVehicleType.ElectricMotorcycle))
+                if (!vehicleType.Equals(eVehicleType.None))
                 {
-                    eLicenseType licenseType = getMotorCycleLicenseType();
-                    int engineVolume = InputHandler.GetIntegerInputFromUser();
-                    if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle))
+                    Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
+                    PrintHandler.AskForVehicleModel();
+                    string modelName = InputHandler.GetStringInputFromUser();
+                    bool valid = false;
+                    float currentWheelAirPressure=0;
+                    while (!valid)
                     {
-                        PrintHandler.AskForCurrentFuelAmount();
-                        float currentFuelAmount = InputHandler.GetFloatInputFromUser();
-                        (vehicle as FuelBasedMotorcycle).SetFields(modelName, licenseNumber, currentFuelAmount,
-                            licenseType, engineVolume, wheelManufacturer, currentWheelAirPressure);
+                        try
+                        {
+                            PrintHandler.AskForCurrentWheelAirPressure();
+                            currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            PrintHandler.PrintException(ex, ex.Message);
+                            continue;
+                        }
+                        catch (FormatException ex)
+                        {
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
+                            continue;
+                        }
+
+                        valid = true;
                     }
-                    else
+
+                    PrintHandler.AskForWheelManufacturer();
+                    string wheelManufacturer = InputHandler.GetStringInputFromUser();
+                    if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) ||
+                        vehicleType.Equals(eVehicleType.ElectricMotorcycle))
                     {
-                        PrintHandler.AskForCurrentBatteryTime();
-                        float currentBatteryTime = InputHandler.GetFloatInputFromUser();
-                        (vehicle as ElectricMotorcycle).SetFields(modelName, licenseNumber, currentBatteryTime,
-                            licenseType, engineVolume, wheelManufacturer, currentWheelAirPressure);
-
+                        getNewMotorcycleDetails(vehicle,vehicleType,modelName,licenseNumber,wheelManufacturer,currentWheelAirPressure);
                     }
-
+                    else if (vehicleType.Equals(eVehicleType.FuelBasedCar) ||
+                             vehicleType.Equals(eVehicleType.ElectricCar))
+                    {
+                        getNewCarDetails(vehicle, vehicleType, modelName, licenseNumber, wheelManufacturer, currentWheelAirPressure);
+                    }
+                    else if (vehicleType.Equals(eVehicleType.Truck))
+                    {
+                        getNewTruckDetails(vehicle, modelName, licenseNumber, wheelManufacturer, currentWheelAirPressure);
+                    }
                 }
-                else if (vehicleType.Equals(eVehicleType.FuelBasedCar) || vehicleType.Equals(eVehicleType.ElectricCar))
-                {
-
-                    eColor chosenColor = getColorFromUser();
-                    int numDoors = getNumberOfDoorsFromUSer();
-                    if (vehicleType.Equals(eVehicleType.FuelBasedCar))
-                    {
-                        PrintHandler.AskForCurrentFuelAmount();
-                        float currentFuelAmount = InputHandler.GetFloatInputFromUser();
-                        (vehicle as FuelBasedCar).SetFields(modelName, licenseNumber, currentFuelAmount, chosenColor,
-                            numDoors, wheelManufacturer, currentWheelAirPressure);
-                    }
-                    else
-                    {
-                        PrintHandler.AskForCurrentBatteryTime();
-                        float currentBatteryTime = InputHandler.GetFloatInputFromUser();
-                        (vehicle as ElectricCar).SetFields(modelName, licenseNumber, currentBatteryTime, chosenColor,
-                            numDoors, wheelManufacturer, currentWheelAirPressure);
-                    }
-
-                }
-                else if (vehicleType.Equals(eVehicleType.Truck))
-                {
-
-                    bool isCarryingDangerousCargo = isTruckCarryingDangerousCargo();
-                    float maxCarryingWeight = InputHandler.GetFloatInputFromUser();
-                    PrintHandler.AskForCurrentFuelAmount();
-                    float currentFuelAmount = InputHandler.GetFloatInputFromUser();
-                    (vehicle as Truck).SetFields(modelName, licenseNumber, currentFuelAmount, isCarryingDangerousCargo,
-                        maxCarryingWeight, wheelManufacturer, currentWheelAirPressure);
-                }
-
-                // TODO: get owner details and send to GarageManager to insert to phonebook. AddCustomerDetailsToBook
-                getCustomerDetails(licenseNumber);
             }
 
+        }
+
+        private void getNewMotorcycleDetails(Vehicle io_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber,
+            string i_WheelManufacturer, float i_CurrentWheelAirPressure)
+        {
+            eLicenseType licenseType = getMotorCycleLicenseType();
+            if (!licenseType.Equals(eLicenseType.None))
+            {
+                int engineVolume = 0;
+                bool valid = false;
+                while (!valid)
+                {
+                    try
+                    {
+                        PrintHandler.AskForEngineVolume();
+                        engineVolume = InputHandler.GetIntegerInputFromUser();
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        PrintHandler.PrintException(ex, ex.Message);
+                        continue;
+                    }
+                    catch (FormatException ex)
+                    {
+                        PrintHandler.PrintException(ex, "Illegal input entered.");
+                        continue;
+                    }
+
+                    valid = true;
+                }
+
+                if (i_VehicleType.Equals(eVehicleType.FuelBasedMotorcycle))
+                {
+                    valid = false;
+                    float currentFuelAmount = 0;
+                    while (!valid)
+                    {
+                        try
+                        {
+                            PrintHandler.AskForCurrentFuelAmount();
+                            currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            PrintHandler.PrintException(ex, ex.Message);
+                            continue;
+                        }
+                        catch (FormatException ex)
+                        {
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
+                            continue;
+                        }
+
+                        valid = true;
+                    }
+
+                    (io_Vehicle as FuelBasedMotorcycle).SetFields(i_ModelName, i_LicenseNumber, currentFuelAmount,
+                        licenseType, engineVolume, i_WheelManufacturer, i_CurrentWheelAirPressure);
+
+                }
+                else if (i_VehicleType.Equals(eVehicleType.ElectricMotorcycle))
+                {
+                    valid = false;
+                    float currentBatteryTime = 0;
+                    while (!valid)
+                    {
+                        try
+                        {
+                            PrintHandler.AskForCurrentBatteryTime();
+                            currentBatteryTime = InputHandler.GetFloatInputFromUser();
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            PrintHandler.PrintException(ex, ex.Message);
+                            continue;
+                        }
+                        catch (FormatException ex)
+                        {
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
+                            continue;
+                        }
+
+                        valid = true;
+                    }
+
+                    (io_Vehicle as ElectricMotorcycle).SetFields(i_ModelName, i_LicenseNumber, currentBatteryTime,
+                        licenseType, engineVolume, i_WheelManufacturer, i_CurrentWheelAirPressure);
+
+                }
+                getCustomerDetails(i_LicenseNumber);
+            }
+        }
+
+        private void getNewCarDetails(Vehicle io_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber,
+            string i_WheelManufacturer, float i_CurrentWheelAirPressure)
+        {
+            eColor chosenColor = getColorFromUser();
+            if (!chosenColor.Equals(eColor.None))
+            {
+                int numDoors = getNumberOfDoorsFromUSer();
+                if (i_VehicleType.Equals(eVehicleType.FuelBasedCar))
+                {
+                    bool valid = false;
+                    float currentFuelAmount = 0;
+                    while (!valid)
+                    {
+                        try
+                        {
+                            PrintHandler.AskForCurrentFuelAmount();
+                            currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            PrintHandler.PrintException(ex, ex.Message);
+                            continue;
+                        }
+                        catch (FormatException ex)
+                        {
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
+                            continue;
+                        }
+
+                        valid = true;
+                    }
+
+                    (io_Vehicle as FuelBasedCar).SetFields(i_ModelName, i_LicenseNumber, currentFuelAmount,
+                        chosenColor,
+                        numDoors, i_WheelManufacturer, i_CurrentWheelAirPressure);
+                }
+                else if (i_VehicleType.Equals(eVehicleType.ElectricCar))
+                {
+                    bool valid = false;
+                    float currentBatteryTime = 0;
+                    while (!valid)
+                    {
+                        try
+                        {
+                            PrintHandler.AskForCurrentBatteryTime();
+                            currentBatteryTime = InputHandler.GetFloatInputFromUser();
+                        }
+                        catch (ArgumentException ex)
+                        {
+                            PrintHandler.PrintException(ex, ex.Message);
+                            continue;
+                        }
+                        catch (FormatException ex)
+                        {
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
+                            continue;
+                        }
+
+                        valid = true;
+                    }
+
+                    (io_Vehicle as ElectricCar).SetFields(i_ModelName, i_LicenseNumber, currentBatteryTime,
+                        chosenColor,
+                        numDoors, i_WheelManufacturer, i_CurrentWheelAirPressure);
+                }
+                getCustomerDetails(i_LicenseNumber);
+            }
+        }
+
+        private void getNewTruckDetails(Vehicle io_Vehicle, string i_ModelName, string i_LicenseNumber,
+            string i_WheelManufacturer, float i_CurrentWheelAirPressure)
+        {
+            bool isCarryingDangerousCargo = isTruckCarryingDangerousCargo();
+            bool valid = false;
+            float maxCarryingWeight = 0;
+            float currentFuelAmount = 0;
+            while (!valid)
+            {
+                try
+                {
+                    PrintHandler.AskForMaxCarryingWeight();
+                    maxCarryingWeight = InputHandler.GetFloatInputFromUser();
+                    PrintHandler.AskForCurrentFuelAmount();
+                    currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                }
+                catch (ArgumentException ex)
+                {
+                    PrintHandler.PrintException(ex, ex.Message);
+                    continue;
+                }
+                catch (FormatException ex)
+                {
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
+                    continue;
+                }
+
+                valid = true;
+            }
+
+            (io_Vehicle as Truck).SetFields(i_ModelName, i_LicenseNumber, currentFuelAmount,
+                isCarryingDangerousCargo,
+                maxCarryingWeight, i_WheelManufacturer, i_CurrentWheelAirPressure);
+
+            getCustomerDetails(i_LicenseNumber);
         }
 
         private void getCustomerDetails(string i_LicenseNumber)
@@ -154,8 +335,7 @@ namespace Ex03.ConsoleUI
         private bool isTruckCarryingDangerousCargo()
         {
             PrintHandler.AskIfTruckIsCarryingDangerousCargo();
-            string chosenOpt = InputHandler.GetStringInputFromUser();
-            bool res = char.Parse(chosenOpt) == 'y';
+            bool res = InputHandler.GetBooleanInputFromUser();
             return res;
         }
 
@@ -166,28 +346,34 @@ namespace Ex03.ConsoleUI
 
         private eLicenseType getMotorCycleLicenseType()
         {
-            PrintHandler.AskForMotorcycleLicenseType();
-            Menu.ShowMotorcycleLicenseTypes();
-            int chosenType = InputHandler.GetChosenOptionInMenuFromUser(4);
-            eLicenseType resLicenseType = eLicenseType.None;
-            switch (chosenType)
+            bool closeMenu = false;
+            eLicenseType resLicenseType=eLicenseType.None;
+
+            while (!closeMenu)
             {
-                case 1:
-                    resLicenseType = eLicenseType.A;
-                    break;
-                case 2:
-                    resLicenseType = eLicenseType.B1;
-                    break;
-                case 3:
-                    resLicenseType = eLicenseType.AA;
-                    break;
-                case 4:
-                    resLicenseType = eLicenseType.BB;
-                    break;
-                default:
-                    PrintHandler.IllegalOptionOutput();
-                    break;
+                int chosenType;
+                try
+                {
+                    PrintHandler.AskForMotorcycleLicenseType();
+                    Menu.ShowMotorcycleLicenseTypes();
+                    chosenType = InputHandler.GetChosenOptionInMenuFromUser(5);
+                }
+                catch (ArgumentException ex)
+                {
+                    PrintHandler.PrintException(ex, ex.Message);
+                    continue;
+                }
+                catch (FormatException ex)
+                {
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
+                    continue;
+                }
+
+                if (chosenType == 5) break;
+                resLicenseType = (eLicenseType) chosenType;
+                closeMenu = true;
             }
+
 
             return resLicenseType;
         }
@@ -198,7 +384,20 @@ namespace Ex03.ConsoleUI
             bool valid = false;
             while (!valid)
             {
-                res = InputHandler.GetIntegerInputFromUser();
+                try
+                {
+                    res = InputHandler.GetIntegerInputFromUser();
+                }
+                catch (ArgumentException ex)
+                {
+                    PrintHandler.PrintException(ex, ex.Message);
+                    continue;
+                }
+                catch (FormatException ex)
+                {
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
+                    continue;
+                }
                 valid = res >= 2 && res <= 5;
             }
 
@@ -207,28 +406,31 @@ namespace Ex03.ConsoleUI
 
         private eColor getColorFromUser()
         {
-            //TODO: Default value for enum?
-            PrintHandler.AskForColor();
-            Menu.ShowColorsOptionsForCars();
-            int chosenOpt = InputHandler.GetIntegerInputFromUser();
-            eColor resColor = 0;
-            switch (chosenOpt)
+            bool closeMenu = false;
+            eColor resColor = eColor.None;
+            while (!closeMenu)
             {
-                case 1:
-                    resColor = eColor.Red;
-                    break;
-                case 2:
-                    resColor = eColor.Black;
-                    break;
-                case 3:
-                    resColor = eColor.Silver;
-                    break;
-                case 4:
-                    resColor = eColor.White;
-                    break;
-                default:
-                    PrintHandler.IllegalOptionOutput();
-                    break;
+                int chosenOpt;
+                try
+                {
+                    PrintHandler.AskForColor();
+                    Menu.ShowColorsOptionsForCars();
+                    chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(5);
+                }
+                catch (ArgumentException ex)
+                {
+                    PrintHandler.PrintException(ex, ex.Message);
+                    continue;
+                }
+                catch (FormatException ex)
+                {
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
+                    continue;
+                }
+
+                if (chosenOpt == 5) break;
+                resColor = (eColor) chosenOpt;
+                closeMenu = true;
             }
 
             return resColor;

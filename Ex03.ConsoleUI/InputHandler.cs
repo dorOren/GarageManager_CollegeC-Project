@@ -43,7 +43,7 @@ namespace Ex03.ConsoleUI
         public static bool GetBooleanInputFromUser()
         {
             string input = Console.ReadLine();
-            bool res= bool.Parse(input);
+            bool res = char.Parse(input) == 'y';
             return res;
         }
     }

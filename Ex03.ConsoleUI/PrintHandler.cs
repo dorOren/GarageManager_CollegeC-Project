@@ -47,17 +47,17 @@ namespace Ex03.ConsoleUI
 
         public static void AskToChooseVehicleType()
         {
-            Console.WriteLine("Please choose the desired vehicle type" + Environment.NewLine);
+            Console.WriteLine("Please choose the desired vehicle type:" + Environment.NewLine);
         }
 
         public static void AskForColor()
         {
-            Console.WriteLine("Choose the car's color" + Environment.NewLine);
+            Console.WriteLine("Choose the car's color:" + Environment.NewLine);
         }
 
         public static void AskForMotorcycleLicenseType()
         {
-            Console.WriteLine("Choose license type" + Environment.NewLine);
+            Console.WriteLine("Choose license type:" + Environment.NewLine);
         }
 
         public static void VehicleIsAlreadyExistsInGarage()
@@ -67,7 +67,7 @@ namespace Ex03.ConsoleUI
 
         public static void AskForCurrentFuelAmount()
         {
-            Console.WriteLine("Enter current fuel amount: " + Environment.NewLine);
+            Console.WriteLine("Enter current fuel amount: ");
         }
 
         public static void AskForWheelManufacturer()
@@ -77,22 +77,42 @@ namespace Ex03.ConsoleUI
 
         public static void AskForCurrentBatteryTime()
         {
-            Console.WriteLine("Enter current battery time remaining: " + Environment.NewLine);
+            Console.WriteLine("Enter current battery time remaining: ");
+        }
+
+        public static void AskForMaxCarryingWeight()
+        {
+            Console.WriteLine("Enter maximum carrying weight: ");
         }
 
         public static void AskIfTruckIsCarryingDangerousCargo()
         {
-            Console.WriteLine("Type 'y' if truck is carrying dangerous cargo, else type 'n'" + Environment.NewLine);
+            Console.WriteLine("Type 'y' if truck is carrying dangerous cargo, else type 'n'");
+        }
+
+        public static void AskForVehicleModel()
+        {
+            Console.WriteLine("Enter vehicle model: ");
+        }
+
+        public static void AskForCurrentWheelAirPressure()
+        {
+            Console.WriteLine("Enter current air pressure of car's wheels: ");
+        }
+
+        public static void AskForEngineVolume()
+        {
+            Console.WriteLine("Enter engine volume: ");
         }
 
         public static void AskForOwnerName()
         {
-            Console.WriteLine("Enter your name: " + Environment.NewLine);
+            Console.WriteLine("Enter your name: ");
         }
 
         public static void AskForOwnerPhone()
         {
-            Console.WriteLine("Enter your phone number: " + Environment.NewLine);
+            Console.WriteLine("Enter your phone number: ");
         }
 
         public static void PrintException(Exception ex, string msg)

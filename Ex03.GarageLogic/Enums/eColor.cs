@@ -10,8 +10,8 @@ namespace Ex03.GarageLogic
     {
         None,
         Red,
-        White,
         Black,
-        Silver
+        Silver,
+        White
     }
 }
