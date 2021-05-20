@@ -21,35 +21,34 @@ namespace Ex03.ConsoleUI
         public void Start()
         {
             bool runGarage = true;
-            Console.Clear();
             while (runGarage)
             {
-                
                 Menu.ShowMainMenu();
 
                 int chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(8);
+                Console.Clear();
                 switch (chosenOpt)
                 {
                     case 1:
                         getNewVehicleDetails();
                         break;
                     case 2:
-                        showLicenseNumbersInGarage(); // done
+                        showLicenseNumbersInGarage();
                         break;
                     case 3:
-                        updateVehicleStatus(); // done
+                        updateVehicleStatus();
                         break;
                     case 4:
-                        inflateWheels(); // done
+                        inflateWheels();
                         break;
                     case 5:
-                        fuelVehicle(); // done
+                        fuelVehicle();
                         break;
                     case 6:
-                        chargeElectricVehicle(); // done
+                        chargeElectricVehicle();
                         break;
                     case 7:
-                        ShowFullVehicleData(); // done
+                        ShowFullVehicleData();
                         break;
                     case 8:
                         runGarage = false;
@@ -338,8 +337,15 @@ namespace Ex03.ConsoleUI
         {
             PrintHandler.AskForOwnerName();
             string ownerName = InputHandler.GetStringInputFromUser();
-            PrintHandler.AskForOwnerPhone();
-            string ownerPhone = InputHandler.GetStringInputFromUser();
+            bool valid = false;
+            string ownerPhone = "\0";
+            while (!valid)
+            {
+                PrintHandler.AskForOwnerPhone();
+                ownerPhone = InputHandler.GetStringInputFromUser();
+                valid = (int.TryParse(ownerPhone, out int temp) && (ownerPhone.Length > 7) && (ownerPhone.Length < 11));
+            }
+
             m_Garage.AddCustomerDetailsToBook(ownerName, ownerPhone, i_LicenseNumber);
         }
 
@@ -626,28 +632,34 @@ namespace Ex03.ConsoleUI
             bool closeMenu = false;
             while (!closeMenu)
             {
-                int statusChosen;
+                //int statusChosen;
                 PrintHandler.AskForLicenseNumber();
                 string inputLicenseNumber = InputHandler.GetStringInputFromUser();
-                try
+                if (isVehicleExistsInGarage(inputLicenseNumber))
                 {
+                    try
+                    {
 
-                    PrintHandler.AskForVehicleStatus();
-                    Menu.ShowUpdatingOptionsByVehicleStatusMenu();
-                    statusChosen = InputHandler.GetChosenOptionInMenuFromUser(4);
-                    if (statusChosen == 4) break;
-                    m_Garage.UpdateVehicleStatus(inputLicenseNumber, (eVehicleStatus)statusChosen);
-                    closeMenu = true;
+                        PrintHandler.AskForVehicleStatus();
+                        Menu.ShowUpdatingOptionsByVehicleStatusMenu();
+                        int statusChosen = InputHandler.GetChosenOptionInMenuFromUser(4);
+                        if (statusChosen == 4) break;
+                        m_Garage.UpdateVehicleStatus(inputLicenseNumber, (eVehicleStatus) statusChosen);
+                        closeMenu = true;
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        PrintHandler.PrintException(ex, ex.Message);
+                    }
+                    catch (FormatException ex)
+                    {
+                        PrintHandler.PrintException(ex, "Illegal input entered.");
+                    }
                 }
-                catch (ArgumentException ex)
+                else
                 {
-                    PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.NoMatchingVehiclesInGarage();
                 }
-                catch (FormatException ex)
-                {
-                    PrintHandler.PrintException(ex, "Illegal input entered.");
-                }
-                
 
                 //m_Garage.UpdateVehicleStatus(inputLicenseNumber, (eVehicleStatus) statusChosen);
                 //closeMenu = true;
@@ -680,8 +692,8 @@ namespace Ex03.ConsoleUI
                 }
 
                 if (chosenOpt == 5) break;
-                
-                List<string> resLicenses = m_Garage.ShowAllVehiclesUnderCare((eVehicleStatus) chosenOpt);
+                List<string> resLicenses = new List<string>();
+                resLicenses = m_Garage.ShowAllVehiclesUnderCare((eVehicleStatus) chosenOpt);
 
                 if (resLicenses.Count > 0)
                 {

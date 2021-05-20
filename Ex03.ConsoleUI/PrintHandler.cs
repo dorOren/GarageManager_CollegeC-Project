@@ -112,7 +112,7 @@ namespace Ex03.ConsoleUI
 
         public static void AskForOwnerPhone()
         {
-            Console.WriteLine("Enter your phone number: ");
+            Console.WriteLine("Enter your phone number (8 to 10 digits): ");
         }
 
         public static void PrintException(Exception ex, string msg)
@@ -133,7 +133,7 @@ namespace Ex03.ConsoleUI
 
         public static void AskForNumberOfDoors()
         {
-            Console.WriteLine("Enter number of doors");
+            Console.WriteLine("Enter number of doors (2 to 5): ");
         }
     }
 }

@@ -8,10 +8,9 @@ namespace Ex03.GarageLogic.Enums
 {
     public enum eVehicleStatus
     {
-        Any,
-        Paid,
+        Paid=1,
         BeingRepaired,
-        Repaired
-        
+        Repaired,
+        Any
     }
 }

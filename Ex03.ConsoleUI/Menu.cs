@@ -27,7 +27,7 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
-                .Append("1. Update to status 'Paid").AppendLine()
+                .Append("1. Update to status 'Paid'").AppendLine()
                 .Append("2. Update to status 'In Repair'").AppendLine()
                 .Append("3. Update to status 'Repaired'").AppendLine()
                 .Append("4. Go back").AppendLine()
@@ -39,7 +39,7 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
-                .Append("1. Show in status 'Paid").AppendLine()
+                .Append("1. Show in status 'Paid'").AppendLine()
                 .Append("2. Show in status 'In Repair'").AppendLine()
                 .Append("3. Show in status 'Repaired'").AppendLine()
                 .Append("4. Show all").AppendLine()

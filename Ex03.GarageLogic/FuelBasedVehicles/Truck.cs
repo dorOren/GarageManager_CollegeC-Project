@@ -11,13 +11,17 @@ namespace Ex03.GarageLogic
         public bool IsCarryingDangerousMaterials { get; set; }
         public float MaxCarryWeight { get; set; }
         
-        public void SetFields(string i_Model, string i_RegistrationNumber,                                     //for Vehicle
-            float i_RemainingFuelAmount,                                                                       //for FuelBasedVehicle
-            bool i_IsCarryingDangerousMaterials, float i_MaxCarryWeight,                                       //for this
-            string i_WheelManufacturer, float i_WheelCurrentAirPressure)                                       //for the wheels
+        public void SetFields(string i_Model, string i_RegistrationNumber,                                                 //for Vehicle
+                              float i_RemainingFuelAmount,                                                                 //for FuelBasedVehicle
+                              bool i_IsCarryingDangerousMaterials, float i_MaxCarryWeight,                                 //for this
+                              string i_WheelManufacturer, float i_WheelCurrentAirPressure)                                 //for the wheels
         {
-            base.SetFields(i_Model, i_RegistrationNumber, i_RemainingFuelAmount / 120f,          //for Vehicle
-                i_RemainingFuelAmount, 120, eFuelType.Soler);                                      //for FuelBasedVehicle;
+            base.SetFields(i_Model, i_RegistrationNumber, i_RemainingFuelAmount / 120f * 100,                //for Vehicle
+                           i_RemainingFuelAmount, 120, eFuelType.Soler);                                       //for FuelBasedVehicle;
+            if (i_MaxCarryWeight <= 0f)
+            {
+                throw new ArgumentException("Maximum carrying weight must be a positive number.");
+            }
             IsCarryingDangerousMaterials = i_IsCarryingDangerousMaterials;
             MaxCarryWeight = i_MaxCarryWeight;
             m_WheelArray = new List<Wheel>(16);

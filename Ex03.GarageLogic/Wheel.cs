@@ -16,6 +16,15 @@ namespace Ex03.GarageLogic
         
         public Wheel(string i_Manufacturer, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
+            if (i_CurrentAirPressure > i_MaxAirPressure)
+            {
+                string error = $"{i_CurrentAirPressure} air pressure is more then air pressure maximum value: {i_MaxAirPressure}";
+                throw new ValueOutOfRangeException(error, i_MaxAirPressure);
+            }
+            if (i_CurrentAirPressure < 1)
+            {
+                throw new ArgumentException("Current air pressure must be a positive number.");
+            }
             Manufacturer = i_Manufacturer;
             CurrentAirPressure = i_CurrentAirPressure;
             MaxAirPressure = i_MaxAirPressure;

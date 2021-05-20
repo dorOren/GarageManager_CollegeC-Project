@@ -18,6 +18,15 @@ namespace Ex03.GarageLogic
             float i_RemainingFuelAmount, float i_MaxFuelAmount, eFuelType i_FuelType)
         {
             base.SetFields(i_Model, i_RegistrationNumber, i_EnergyPercentage);
+            if (i_RemainingFuelAmount > i_MaxFuelAmount)
+            {
+                string error = $"{i_RemainingFuelAmount} liters is more then fuel maximum value: {i_MaxFuelAmount}";
+                throw new ValueOutOfRangeException(error,i_MaxFuelAmount);
+            }
+            if (i_RemainingFuelAmount <= 0f)
+            {
+                throw new ArgumentException("Remaining fuel amount must be a positive number.");
+            }
             FuelType = i_FuelType;
             MaxFuelAmount = i_MaxFuelAmount;
             RemainingFuelAmount = i_RemainingFuelAmount;

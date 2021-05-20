@@ -74,14 +74,19 @@ namespace Ex03.GarageLogic
         public List<string> ShowAllVehiclesUnderCare(eVehicleStatus i_VehicleStatus)
         {
             List<string> data = new List<string>();
-            data.Append("List of all vehicle's registration numbers in garage:");
+            data.Add("List of all vehicle's registration numbers in garage:");
             foreach (Vehicle vehicle in m_VehiclesInGarage)
             {
                 CustomerData customerData = m_Book.GetCustomerData(vehicle.RegistrationNumber);
                 if (customerData.VehicleStatus.Equals(i_VehicleStatus) || i_VehicleStatus.Equals(eVehicleStatus.Any))
                 {
-                    data.Append(vehicle.RegistrationNumber);
+                    data.Add(vehicle.RegistrationNumber);
                 }
+            }
+
+            if (data.Count == 1)
+            {
+                data.Add("None");
             }
 
             return data;

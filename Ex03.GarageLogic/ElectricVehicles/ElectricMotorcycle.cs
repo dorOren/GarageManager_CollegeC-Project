@@ -12,13 +12,17 @@ namespace Ex03.GarageLogic
         public eLicenseType LicenseType { get; set; }
         public int EngineVolume { get; set; }
        
-        public void SetFields(string i_Model, string i_RegistrationNumber,            //for Vehicle
-                                  float i_RemainingBatteryTime,                                                 //for ElectricVehicle
-                                  eLicenseType i_LicenseType, int i_EngineVolume,                               //for this
-                                  string i_WheelManufacturer, float i_WheelCurrentAirPressure)                  //for the wheels
+        public void SetFields(string i_Model, string i_RegistrationNumber,                                     //for Vehicle
+                              float i_RemainingBatteryTime,                                                    //for ElectricVehicle
+                              eLicenseType i_LicenseType, int i_EngineVolume,                                  //for this
+                              string i_WheelManufacturer, float i_WheelCurrentAirPressure)                     //for the wheels
         {
-            base.SetFields(i_Model, i_RegistrationNumber, i_RemainingBatteryTime / 1.8f,                                   //for Vehicle
-                i_RemainingBatteryTime, 1.8f);                                                     //for ElectricVehicle;
+            base.SetFields(i_Model, i_RegistrationNumber, i_RemainingBatteryTime / 1.8f * 100,   //for Vehicle
+                           i_RemainingBatteryTime, 1.8f);                                         //for ElectricVehicle;
+            if (i_EngineVolume < 1)
+            {
+                throw new ArgumentException("Engine volume must be a positive number.");
+            }
             LicenseType = i_LicenseType;
             EngineVolume = i_EngineVolume;
             m_WheelArray = new List<Wheel>(2);
