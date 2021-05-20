@@ -9,10 +9,10 @@ namespace Ex03.GarageLogic.Enums
     public enum eVehicleType
     {
         None,
-        FuelBasedCar,
         FuelBasedMotorcycle,
-        Truck,
+        ElectricMotorcycle,
+        FuelBasedCar,
         ElectricCar,
-        ElectricMotorcycle
+        Truck
     }
 }

@@ -10,7 +10,7 @@ namespace Ex03.ConsoleUI
     {
         public static void IllegalOptionOutput()
         {
-            Console.WriteLine("Error: Illegal option entered. Please try again." + Environment.NewLine);
+            Console.WriteLine("Error: Illegal option entered. Please try again.");
         }
 
         public static void PrintList<T>(List<T> i_List)
@@ -22,7 +22,7 @@ namespace Ex03.ConsoleUI
         }
         public static void PrintVehicleDetails(StringBuilder i_Details)
         {
-            Console.WriteLine(i_Details + Environment.NewLine);
+            Console.WriteLine(i_Details);
         }
         public static void AskForLicenseNumber()
         {
@@ -31,7 +31,7 @@ namespace Ex03.ConsoleUI
 
         public static void AskForVehicleStatus()
         {
-            Console.WriteLine("Choose the vehicle's new status: " + Environment.NewLine);
+            Console.WriteLine("Choose the vehicle's new status: ");
         }
 
         public static void AskToChooseFuelType()
@@ -47,22 +47,22 @@ namespace Ex03.ConsoleUI
 
         public static void AskToChooseVehicleType()
         {
-            Console.WriteLine("Please choose the desired vehicle type:" + Environment.NewLine);
+            Console.WriteLine("Please choose the desired vehicle type:");
         }
 
         public static void AskForColor()
         {
-            Console.WriteLine("Choose the car's color:" + Environment.NewLine);
+            Console.WriteLine("Choose the car's color:");
         }
 
         public static void AskForMotorcycleLicenseType()
         {
-            Console.WriteLine("Choose license type:" + Environment.NewLine);
+            Console.WriteLine("Choose license type:");
         }
 
         public static void VehicleIsAlreadyExistsInGarage()
         {
-            Console.WriteLine("Cannot add the desired Vehicle, as it's already exists in the garage. Current status is: in repair." + Environment.NewLine);
+            Console.WriteLine("Cannot add the desired Vehicle, as it's already exists in the garage. Current status is: in repair.");
         }
 
         public static void AskForCurrentFuelAmount()
@@ -117,7 +117,7 @@ namespace Ex03.ConsoleUI
 
         public static void PrintException(Exception ex, string msg)
         {
-            Console.WriteLine(msg+Environment.NewLine);
+            Console.WriteLine($"{msg}{Environment.NewLine}");
         }
     }
 }

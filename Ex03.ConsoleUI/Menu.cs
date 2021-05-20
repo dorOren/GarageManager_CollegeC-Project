@@ -80,14 +80,16 @@ namespace Ex03.ConsoleUI
                 .AppendLine().Append("2. Electrical Motorcycle").AppendLine().Append("3. Car").AppendLine()
                 .Append("4. Electrical Car").AppendLine().Append("5. Truck").AppendLine().Append("6. Go back").AppendLine()
                 .Append("================================================");
+            Console.WriteLine(sb);
         }
 
         public static void ShowColorsOptionsForCars()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
-                .Append("1. Res").AppendLine().Append("2. White").AppendLine().Append("3. Black").AppendLine()
+                .Append("1. Red").AppendLine().Append("2. White").AppendLine().Append("3. Black").AppendLine()
                 .Append("4. Silver").AppendLine().Append("5. Go back").AppendLine().Append("================================================");
+            Console.WriteLine(sb);
         }
 
         public static void ShowMotorcycleLicenseTypes()
@@ -95,6 +97,7 @@ namespace Ex03.ConsoleUI
             StringBuilder sb = new StringBuilder();
             sb.Append("1. A").AppendLine().Append("2. B1").AppendLine().Append("3. AA").AppendLine().Append("4. BB").AppendLine()
                 .Append("5. Go back").AppendLine();
+            Console.WriteLine(sb);
         }
     }
 }

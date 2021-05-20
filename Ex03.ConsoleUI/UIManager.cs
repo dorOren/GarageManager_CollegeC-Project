@@ -68,60 +68,69 @@ namespace Ex03.ConsoleUI
         {
             PrintHandler.AskForLicenseNumber();
             string licenseNumber = InputHandler.GetStringInputFromUser();
-
-            if (isVehicleExistsInGarage(licenseNumber))
+            try
             {
-                m_Garage.UpdateVehicleStatus(licenseNumber, eVehicleStatus.BeingRepaired);
-                PrintHandler.VehicleIsAlreadyExistsInGarage();
-            }
-            else
-            {
-                eVehicleType vehicleType = getChosenVehicleTypeAsEnum();
-                if (!vehicleType.Equals(eVehicleType.None))
+                if (isVehicleExistsInGarage(licenseNumber))
                 {
-                    Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
-                    PrintHandler.AskForVehicleModel();
-                    string modelName = InputHandler.GetStringInputFromUser();
-                    bool valid = false;
-                    float currentWheelAirPressure=0;
-                    while (!valid)
+                    m_Garage.UpdateVehicleStatus(licenseNumber, eVehicleStatus.BeingRepaired);
+                    PrintHandler.VehicleIsAlreadyExistsInGarage();
+                }
+                else
+                {
+                    eVehicleType vehicleType = getChosenVehicleTypeAsEnum();
+                    if (!vehicleType.Equals(eVehicleType.None))
                     {
-                        try
+                        Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
+                        PrintHandler.AskForVehicleModel();
+                        string modelName = InputHandler.GetStringInputFromUser();
+                        bool valid = false;
+                        float currentWheelAirPressure = 0;
+                        while (!valid)
                         {
-                            PrintHandler.AskForCurrentWheelAirPressure();
-                            currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
-                        }
-                        catch (ArgumentException ex)
-                        {
-                            PrintHandler.PrintException(ex, ex.Message);
-                            continue;
-                        }
-                        catch (FormatException ex)
-                        {
-                            PrintHandler.PrintException(ex, "Illegal input entered.");
-                            continue;
+                            try
+                            {
+                                PrintHandler.AskForCurrentWheelAirPressure();
+                                currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
+                            }
+                            catch (ArgumentException ex)
+                            {
+                                PrintHandler.PrintException(ex, ex.Message);
+                                continue;
+                            }
+                            catch (FormatException ex)
+                            {
+                                PrintHandler.PrintException(ex, "Illegal input entered.");
+                                continue;
+                            }
+
+                            valid = true;
                         }
 
-                        valid = true;
-                    }
-
-                    PrintHandler.AskForWheelManufacturer();
-                    string wheelManufacturer = InputHandler.GetStringInputFromUser();
-                    if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) ||
-                        vehicleType.Equals(eVehicleType.ElectricMotorcycle))
-                    {
-                        getNewMotorcycleDetails(vehicle,vehicleType,modelName,licenseNumber,wheelManufacturer,currentWheelAirPressure);
-                    }
-                    else if (vehicleType.Equals(eVehicleType.FuelBasedCar) ||
-                             vehicleType.Equals(eVehicleType.ElectricCar))
-                    {
-                        getNewCarDetails(vehicle, vehicleType, modelName, licenseNumber, wheelManufacturer, currentWheelAirPressure);
-                    }
-                    else if (vehicleType.Equals(eVehicleType.Truck))
-                    {
-                        getNewTruckDetails(vehicle, modelName, licenseNumber, wheelManufacturer, currentWheelAirPressure);
+                        PrintHandler.AskForWheelManufacturer();
+                        string wheelManufacturer = InputHandler.GetStringInputFromUser();
+                        if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) ||
+                            vehicleType.Equals(eVehicleType.ElectricMotorcycle))
+                        {
+                            getNewMotorcycleDetails(vehicle, vehicleType, modelName, licenseNumber, wheelManufacturer,
+                                currentWheelAirPressure);
+                        }
+                        else if (vehicleType.Equals(eVehicleType.FuelBasedCar) ||
+                                 vehicleType.Equals(eVehicleType.ElectricCar))
+                        {
+                            getNewCarDetails(vehicle, vehicleType, modelName, licenseNumber, wheelManufacturer,
+                                currentWheelAirPressure);
+                        }
+                        else if (vehicleType.Equals(eVehicleType.Truck))
+                        {
+                            getNewTruckDetails(vehicle, modelName, licenseNumber, wheelManufacturer,
+                                currentWheelAirPressure);
+                        }
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                PrintHandler.PrintException(ex,ex.Message);
             }
 
         }
@@ -341,7 +350,14 @@ namespace Ex03.ConsoleUI
 
         private bool isVehicleExistsInGarage(string i_LicenseNumber)
         {
-            return m_Garage.FindVehicleInGarage(i_LicenseNumber) != null;
+            bool found = false;
+            try
+            {
+                found = m_Garage.FindVehicleInGarage(i_LicenseNumber) != null;
+            }
+            catch { }
+
+            return found;
         }
 
         private eLicenseType getMotorCycleLicenseType()
