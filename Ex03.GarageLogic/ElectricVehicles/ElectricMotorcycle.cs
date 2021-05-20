@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
     {
         public eLicenseType LicenseType { get; }
         public int EngineVolume { get; }
-
+        
         public ElectricMotorcycle(string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,            //for Vehicle
             float i_RemainingBatteryTime,                                                                           //for ElectricVehicle
             eLicenseType i_LicenseType, int i_EngineVolume,                                                         //for this

@@ -70,9 +70,12 @@ namespace Ex03.ConsoleUI
             eVehicleType vehicleType = getChosenVehicletypeAsEnum();
             string modelName = InputHandler.GetStringInputFromUser();
             string LicenseNumber = InputHandler.GetStringInputFromUser();
-            if(m_Garage.FindVehicleInGarage(LicenseNumber) != null)
+            float currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
+
+            if (isVehicleExistsInGarage(LicenseNumber))
             {
-                // TODO: change status to "in repair" and return to main menu.
+                m_Garage.UpdateVehicleStatus(LicenseNumber, eVehicleStatus.BeingRepaired);
+                PrintHandler.VehicleIsAlreadyExistsInGarage();
             }
             else
             {
@@ -81,7 +84,7 @@ namespace Ex03.ConsoleUI
                 {
                     eLicenseType licenseType = getMotorCycleLicenseType();
                     int engineVolume = InputHandler.GetIntegerInputFromUser();
-                    GarageManager.SetMotorcycle(vehicle, vehicleType, modelName, LicenseNumber, licenseType, engineVolume);
+                    m_Garage.SetMotorcycle(vehicle, vehicleType, modelName, LicenseNumber, licenseType, engineVolume);
                 }
                 else if (vehicleType.Equals(eVehicleType.FuelBasedCar) || vehicleType.Equals(eVehicleType.ElectricCar))
                 {
@@ -103,6 +106,11 @@ namespace Ex03.ConsoleUI
             
             
 
+        }
+
+        private bool isVehicleExistsInGarage(string i_LicenseNumber)
+        {
+            return m_Garage.FindVehicleInGarage(i_LicenseNumber) != null;
         }
 
         private eLicenseType getMotorCycleLicenseType()

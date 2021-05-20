@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
@@ -15,19 +16,7 @@ namespace Ex03.GarageLogic
             m_CustomerBook = new Dictionary<string, CustomerData>();
         }
 
-        public bool findKey(string i_KeyToFind)
-        {
-            if (m_CustomerBook.ContainsKey(i_KeyToFind))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public void AddCustomer(string i_LicenseNumber, string i_OwnerName, string i_OwnerPhone)
+        public void AddCustomer(string i_LicenseNumber, CustomerData i_Data)
         {
             CustomerData data = new CustomerData(i_OwnerName, i_OwnerPhone);
             m_CustomerBook.Add(i_LicenseNumber, data);
