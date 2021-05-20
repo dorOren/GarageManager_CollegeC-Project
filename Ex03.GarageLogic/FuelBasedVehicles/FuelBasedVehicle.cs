@@ -13,16 +13,16 @@ namespace Ex03.GarageLogic
         public float RemainingFuelAmount { get; set; }
         public float MaxFuelAmount { get; set; }
 
-
-        public FuelBasedVehicle(string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,
+        
+        public void SetFields(string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,
             float i_RemainingFuelAmount, float i_MaxFuelAmount, eFuelType i_FuelType)
-            : base(i_Model, i_RegistrationNumber, i_EnergyPercentage)
         {
+            base.SetFields(i_Model, i_RegistrationNumber, i_EnergyPercentage);
             FuelType = i_FuelType;
             MaxFuelAmount = i_MaxFuelAmount;
             RemainingFuelAmount = i_RemainingFuelAmount;
         }
-
+        
         public void FuelVehicle(float i_NumberOfLitersToAdd)
         {
             float predictedFuelAmount = i_NumberOfLitersToAdd + RemainingFuelAmount;

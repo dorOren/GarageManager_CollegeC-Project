@@ -11,14 +11,14 @@ namespace Ex03.GarageLogic
     {
         public eLicenseType LicenseType { get; set; }
         public int EngineVolume { get; set; }
-
-        public ElectricMotorcycle(string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,            //for Vehicle
-                                  float i_RemainingBatteryTime,                                                                           //for ElectricVehicle
-                                  eLicenseType i_LicenseType, int i_EngineVolume,                                                         //for this
-                                  string i_WheelManufacturer, float i_WheelCurrentAirPressure)                                            //for the wheels
-            : base(i_Model, i_RegistrationNumber, i_EnergyPercentage,                                               //for Vehicle
-                i_RemainingBatteryTime, 1.8f)                                                          //for ElectricVehicle
-        {   
+       
+        public void SetFields(string i_Model, string i_RegistrationNumber,            //for Vehicle
+                                  float i_RemainingBatteryTime,                                                 //for ElectricVehicle
+                                  eLicenseType i_LicenseType, int i_EngineVolume,                               //for this
+                                  string i_WheelManufacturer, float i_WheelCurrentAirPressure)                  //for the wheels
+        {
+            base.SetFields(i_Model, i_RegistrationNumber, i_RemainingBatteryTime / 1.8f,                                   //for Vehicle
+                i_RemainingBatteryTime, 1.8f);                                                     //for ElectricVehicle;
             LicenseType = i_LicenseType;
             EngineVolume = i_EngineVolume;
             for (int i = 0; i < 2; i++)

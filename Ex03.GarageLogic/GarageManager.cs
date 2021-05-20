@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ex03.GarageLogic.Enums;
-using Ex03.GarageLogic.Exceptions;
+
 
 namespace Ex03.GarageLogic
 {
@@ -23,14 +23,14 @@ namespace Ex03.GarageLogic
         }
 
         
-        public Vehicle VehicleInit(eVehicleType i_VehicleType)
+        public Vehicle InitVehicle(eVehicleType i_VehicleType)
         {
             return m_Factory.CreateVehicle(i_VehicleType);
         }
 
         public void AddCustomerDetailsToBook(string i_OwnerName, string i_OwnerPhoneNumber, string i_RegistrationNumber)
         {
-            if (!m_Book.findKey(i_RegistrationNumber))
+            if (!m_Book.FindKey(i_RegistrationNumber))
             {
                 m_Book.AddCustomer(i_RegistrationNumber, i_OwnerName, i_OwnerPhoneNumber);
             }
@@ -52,10 +52,40 @@ namespace Ex03.GarageLogic
 
             if (!found)
             {
-                throw new IllegalRequestException("Requested vehicle is not in the garage.");
+                throw new ArgumentException("Requested vehicle is not in the garage.");
             }
 
             return requestedVehicle as Vehicle;
+        }
+
+        public void UpdateVehicleStatus(string i_i_RegistrationNumber, eVehicleStatus i_VehicleStatus)
+        {
+            m_Book.UpdateVehicleStatus(i_i_RegistrationNumber,i_VehicleStatus);
+        }
+
+        private float calculateRemainingPowerPercentage(eVehicleType i_VehicleType, float i_RemainingPowerAmountInVehicle)
+        {
+            float res = 0;
+            switch (i_VehicleType)
+            {
+                case eVehicleType.ElectricMotorcycle:
+                    res = i_RemainingPowerAmountInVehicle / 1.8f;
+                    break;
+                case eVehicleType.FuelBasedMotorcycle:
+                    res = i_RemainingPowerAmountInVehicle / 6f;
+                    break;
+                case eVehicleType.ElectricCar:
+                    res = i_RemainingPowerAmountInVehicle / 3.2f;
+                    break;
+                case eVehicleType.FuelBasedCar:
+                    res = i_RemainingPowerAmountInVehicle / 45f;
+                    break;
+                case eVehicleType.Truck:
+                    res = i_RemainingPowerAmountInVehicle / 120f;
+                    break;
+            }
+
+            return res;
         }
 
         public StringBuilder ShowAllVehiclesUnderCare(eVehicleStatus i_VehicleStatus)
@@ -96,7 +126,7 @@ namespace Ex03.GarageLogic
                     }
                     else
                     {
-                        throw new IllegalRequestException("Requested fuel Type does not match vehicle's fuel type.");
+                        throw new ArgumentException("Requested fuel Type does not match vehicle's fuel type.");
                     }
 
                 }
@@ -108,7 +138,7 @@ namespace Ex03.GarageLogic
                     }
                     else
                     {
-                        throw new IllegalRequestException("Requested fuel Type does not match vehicle's fuel type.");
+                        throw new ArgumentException("Requested fuel Type does not match vehicle's fuel type.");
                     }
                 }
                 else if (vehicle is Truck)
@@ -119,14 +149,14 @@ namespace Ex03.GarageLogic
                     }
                     else
                     {
-                        throw new IllegalRequestException("Requested fuel Type does not match vehicle's fuel type.");
+                        throw new ArgumentException("Requested fuel Type does not match vehicle's fuel type.");
                     }
                 }
 
             }
             else
             {
-                throw new IllegalRequestException("This vehicle is not fuel based.");
+                throw new ArgumentException("This vehicle is not fuel based.");
             }
         }
 
@@ -140,7 +170,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new IllegalRequestException("This vehicle is not electric.");
+                throw new ArgumentException("This vehicle is not electric.");
             }
         }
 
@@ -249,18 +279,7 @@ namespace Ex03.GarageLogic
             return data;
         }
 
-        public Vehicle InitVehicle(eVehicleType i_VehicleType)
-        {
-            return m_Factory.CreateVehicle(i_VehicleType);
-        }
-        public void AddCustomerDetailsToBook(string i_OwnerName, string i_OwnerPhoneNumber, string i_RegistrationNumber)
-        {
-            if (!m_Book.FindKey(i_RegistrationNumber))
-            {
-                m_Book.AddCustomer(i_RegistrationNumber, i_OwnerName, i_OwnerPhoneNumber);
-            }
-        }
-        
+        /*
         public void SetMotorcycle(Vehicle i_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber, eLicenseType i_LicenseType, int i_EngineVolume)
         {
             
@@ -290,5 +309,6 @@ namespace Ex03.GarageLogic
         {
             
         }
+        */
     }
 }

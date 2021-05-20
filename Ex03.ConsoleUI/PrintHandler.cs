@@ -20,7 +20,10 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(item.ToString());
             }
         }
-
+        public static void PrintVehicleDetails(StringBuilder i_Details)
+        {
+            Console.WriteLine(i_Details);
+        }
         public static void AskForLicenseNumber()
         {
             Console.WriteLine("Please enter license number.");

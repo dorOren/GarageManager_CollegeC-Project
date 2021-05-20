@@ -67,36 +67,38 @@ namespace Ex03.ConsoleUI
         private void getNewVehicleDetails()
         {// TODO: vehicle factory is currently not fit to this flow. Check with Dor.
 
-            eVehicleType vehicleType = getChosenVehicletypeAsEnum();
-            string modelName = InputHandler.GetStringInputFromUser();
-            string LicenseNumber = InputHandler.GetStringInputFromUser();
-            float currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
+            string licenseNumber = InputHandler.GetStringInputFromUser();
 
-            if (isVehicleExistsInGarage(LicenseNumber))
+            if (isVehicleExistsInGarage(licenseNumber))
             {
-                m_Garage.UpdateVehicleStatus(LicenseNumber, eVehicleStatus.BeingRepaired);
+                m_Garage.UpdateVehicleStatus(licenseNumber, eVehicleStatus.BeingRepaired);
                 PrintHandler.VehicleIsAlreadyExistsInGarage();
             }
             else
             {
+                eVehicleType vehicleType = getChosenVehicleTypeAsEnum();
+                string modelName = InputHandler.GetStringInputFromUser();
+                float currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
                 Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
                 if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) || vehicleType.Equals(eVehicleType.ElectricMotorcycle))
                 {
                     eLicenseType licenseType = getMotorCycleLicenseType();
                     int engineVolume = InputHandler.GetIntegerInputFromUser();
-                    m_Garage.SetMotorcycle(vehicle, vehicleType, modelName, LicenseNumber, licenseType, engineVolume);
+
+                    (vehicle as FuelBasedMotorcycle).SetFields(modelName, licenseNumber, licenseType, engineVolume);
                 }
                 else if (vehicleType.Equals(eVehicleType.FuelBasedCar) || vehicleType.Equals(eVehicleType.ElectricCar))
                 {
                     eColor chosenColor = getColorFromUser();
                     int numDoors = getNumberOfDoorsFromUSer();
-                    GarageManager.SetFuelBasedCar(vehicle, vehicleType, modelName, LicenseNumber, chosenColor, numDoors);
+                        //m_Garage.SetFuelBasedCar(vehicle, vehicleType, modelName, licenseNumber, chosenColor, numDoors);
+                        (vehicle as FuelBasedCar).SetFields();
                 }
                 else if (vehicleType.Equals(eVehicleType.Truck))
                 {
                     bool isCarryingDangerousCargo = InputHandler.GetBooleanInputFromUser();
                     float maxCarryingWeight = InputHandler.GetFloatInputFromUser();
-                    GarageManager.SetTruck(vehicle, vehicleType, modelName, LicenseNumber, isCarryingDangerousCargo, maxCarryingWeight);
+                    m_Garage.SetTruck(vehicle, vehicleType, modelName, licenseNumber, isCarryingDangerousCargo, maxCarryingWeight);
                 }
                 // TODO: get owner details and send to GarageManager to insert to phonebook.
             }
@@ -214,8 +216,9 @@ namespace Ex03.ConsoleUI
 
         private void ShowFullVehicleData()
         {// TODO: 1. Maybe should add an exception for returning empty list.
-            List<Vehicle> vehiclesList = GarageManager.GetAllVehiclesInGarage();
-            PrintHandler.PrintList(vehiclesList);
+            string i_LicenseNumber = InputHandler.GetStringInputFromUser();
+            StringBuilder vehicleDetails = m_Garage.ShowVehicleData(i_LicenseNumber);
+            PrintHandler.PrintVehicleDetails(vehicleDetails);
         }
 
         private void chargeElectricVehicle()
@@ -223,7 +226,7 @@ namespace Ex03.ConsoleUI
             PrintHandler.AskForLicenseNumber();
             string inputLicenseNumber = InputHandler.GetStringInputFromUser();
             int amountOfBatteryTimeToAdd = InputHandler.GetIntegerInputFromUser();
-            GarageManager.ChargeBattery(inputLicenseNumber, amountOfBatteryTimeToAdd);
+            m_Garage.ChargeBattery(inputLicenseNumber, amountOfBatteryTimeToAdd);
         }
 
         private void fuelVehicle()
@@ -235,7 +238,7 @@ namespace Ex03.ConsoleUI
             eFuelType chosenFuelType = getFuelTypeAndConvertToEnum();
             PrintHandler.AskForFuelingAmount();
             float amountToFuel = InputHandler.GetFloatInputFromUser();
-            GarageManager.FuelVehicle(inputLicenseNumber, chosenFuelType, amountToFuel);
+            m_Garage.FuelVehicle(inputLicenseNumber, chosenFuelType, amountToFuel);
         }
 
         private eFuelType getFuelTypeAndConvertToEnum()
@@ -269,7 +272,7 @@ namespace Ex03.ConsoleUI
         {// TODO: GarageLogic.InflateToMax
             PrintHandler.AskForLicenseNumber();
             string inputLicenseNumber = InputHandler.GetStringInputFromUser();
-            GarageManager.InflateToMax(inputLicenseNumber);
+            m_Garage.InflateToMax(inputLicenseNumber);
         }
 
         private void updateVehicleStatus()
@@ -283,13 +286,13 @@ namespace Ex03.ConsoleUI
             switch (statusChosen)
             {
                 case 1:
-                    GarageManager.UpdateVehicleStatus(inputLicenseNumber, eVehicleStatus.Paid);
+                    m_Garage.UpdateVehicleStatus(inputLicenseNumber, eVehicleStatus.Paid);
                     break;
                 case 2:
-                    GarageManager.UpdateVehicleStatus(inputLicenseNumber, eVehicleStatus.BeingRepaired);
+                    m_Garage.UpdateVehicleStatus(inputLicenseNumber, eVehicleStatus.BeingRepaired);
                     break;
                 case 3:
-                    GarageManager.UpdateVehicleStatus(inputLicenseNumber, eVehicleStatus.Repaired);
+                    m_Garage.UpdateVehicleStatus(inputLicenseNumber, eVehicleStatus.Repaired);
                     break;
                 case 4:
                     break;
@@ -314,13 +317,16 @@ namespace Ex03.ConsoleUI
                 switch (chosenOpt)
                 {
                     case 1:
-                        resLicenses = GarageManager.ShowAllVehiclesUnderCare(eVehicleStatus.Paid);
+                        resLicenses = m_Garage.ShowAllVehiclesUnderCare(eVehicleStatus.Paid);
                         break;
                     case 2:
-                        resLicenses = GarageManager.ShowAllVehiclesUnderCare(eVehicleStatus.BeingRepaired);
+                        resLicenses = m_Garage.ShowAllVehiclesUnderCare(eVehicleStatus.BeingRepaired);
                         break;
                     case 3:
-                        resLicenses = GarageManager.ShowAllVehiclesUnderCare(eVehicleStatus.Repaired);
+                        resLicenses = m_Garage.ShowAllVehiclesUnderCare(eVehicleStatus.Repaired);
+                        break;
+                    case 4:
+                        resLicenses = m_Garage.ShowAllVehiclesUnderCare(eVehicleStatus.Any);
                         break;
                     case 5:
                         runMenu = false;

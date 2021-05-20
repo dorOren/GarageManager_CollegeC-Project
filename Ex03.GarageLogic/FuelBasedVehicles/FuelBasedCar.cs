@@ -9,15 +9,15 @@ namespace Ex03.GarageLogic
     public class FuelBasedCar : FuelBasedVehicle
     {
         public eColor Color { get; set; }
-        public int NumberOfDoors { get; }
+        public int NumberOfDoors { get; set; }
 
-        public FuelBasedCar(string i_Model, string i_RegistrationNumber, float i_EnergyPercentage,                    //for Vehicle
+        public void SetFields(string i_Model, string i_RegistrationNumber,                 //for Vehicle
             float i_RemainingFuelAmount,                                                                              //for FuelBasedVehicle
             eColor i_Color, int i_NumberOfDoors,                                                                      //for this
-            string i_WheelManufacturer, float i_WheelCurrentAirPressure)                                                //for the wheels
-            : base(i_Model, i_RegistrationNumber, i_EnergyPercentage,                                                 //for Vehicle
-                i_RemainingFuelAmount, 45, eFuelType.Octan95)                                             //for FuelBasedVehicle
+            string i_WheelManufacturer, float i_WheelCurrentAirPressure)                                              //for the wheels
         {
+            base.SetFields(i_Model, i_RegistrationNumber, i_RemainingFuelAmount / 45f,                                         //for Vehicle
+                i_RemainingFuelAmount, 45, eFuelType.Octan95);                                            //for FuelBasedVehicle;
             Color = i_Color;
             NumberOfDoors = i_NumberOfDoors;
             for (int i = 0; i < 4; i++)
@@ -25,5 +25,6 @@ namespace Ex03.GarageLogic
                 m_WheelArray.Add(new Wheel(i_WheelManufacturer, i_WheelCurrentAirPressure, 32));
             }
         }
+        
     }
 }
