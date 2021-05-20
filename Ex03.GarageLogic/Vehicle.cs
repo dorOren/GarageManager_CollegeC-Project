@@ -10,7 +10,8 @@ namespace Ex03.GarageLogic
     public abstract class Vehicle
     {
         public string Model { get; set; }
-        public string RegistrationNumber { get; }
+        public string RegistrationNumber { get; set; }
+
         public float EnergyPercentage { get; set; }
         public List<Wheel> m_WheelArray { get; set; }
 
