@@ -21,5 +21,11 @@ namespace Ex03.GarageLogic
           RegistrationNumber = i_RegistrationNumber;
           EnergyPercentage = i_EnergyPercentage;
         }
+
+        public override string ToString()
+        {
+            return "Model: " + Model + Environment.NewLine + "License number: " + RegistrationNumber
+                   + Environment.NewLine + "Energy Precentage: " + EnergyPercentage + Environment.NewLine;
+        }
     }
 }

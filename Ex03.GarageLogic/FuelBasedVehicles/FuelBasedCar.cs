@@ -20,11 +20,16 @@ namespace Ex03.GarageLogic
                 i_RemainingFuelAmount, 45, eFuelType.Octan95);                                            //for FuelBasedVehicle;
             Color = i_Color;
             NumberOfDoors = i_NumberOfDoors;
+            m_WheelArray = new List<Wheel>(4);
             for (int i = 0; i < 4; i++)
             {
                 m_WheelArray.Add(new Wheel(i_WheelManufacturer, i_WheelCurrentAirPressure, 32));
             }
         }
-        
+
+        public override string ToString()
+        {
+            return base.ToString() + "Color: " + Color + Environment.NewLine + "Number of doors: " + NumberOfDoors + Environment.NewLine;
+        }
     }
 }

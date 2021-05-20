@@ -20,11 +20,18 @@ namespace Ex03.GarageLogic
                 i_RemainingFuelAmount, 120, eFuelType.Soler);                                      //for FuelBasedVehicle;
             IsCarryingDangerousMaterials = i_IsCarryingDangerousMaterials;
             MaxCarryWeight = i_MaxCarryWeight;
+            m_WheelArray = new List<Wheel>(16);
             for (int i = 0; i < 16; i++)
             {
                 m_WheelArray.Add(new Wheel(i_WheelManufacturer, i_WheelCurrentAirPressure, 26));
             }
         }
-        
+
+        public override string ToString()
+        {
+            
+            return base.ToString() + Environment.NewLine + "Is carrying dangerous cargo: " + IsCarryingDangerousMaterials + Environment.NewLine
+                   + "Max carry weight: " + MaxCarryWeight + Environment.NewLine;
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace Ex03.ConsoleUI
 
         public static void AskToChooseFuelType()
         {
-            Console.WriteLine("Please enter the desired fuel type: ");
+            Console.WriteLine("Please choose the desired fuel type: ");
         }
 
         public static void AskForFuelingAmount()
@@ -72,7 +72,7 @@ namespace Ex03.ConsoleUI
 
         public static void AskForWheelManufacturer()
         {
-            Console.WriteLine("Enter wheels manufacturer: + Environment.NewLine");
+            Console.WriteLine("Enter wheels manufacturer:" + Environment.NewLine);
         }
 
         public static void AskForCurrentBatteryTime()
@@ -118,6 +118,22 @@ namespace Ex03.ConsoleUI
         public static void PrintException(Exception ex, string msg)
         {
             Console.WriteLine($"{msg}{Environment.NewLine}");
+        }
+
+
+        public static void AskForAmountOfBatteryInMinutesToCharge()
+        {
+            Console.WriteLine("Enter the amount of battery minutes you want to charge: " + Environment.NewLine);
+        }
+
+        public static void NoMatchingVehiclesInGarage()
+        {
+            Console.WriteLine("No matching vehicles in garage" + Environment.NewLine);
+        }
+
+        public static void AskForNumberOfDoors()
+        {
+            Console.WriteLine("Enter number of doors");
         }
     }
 }

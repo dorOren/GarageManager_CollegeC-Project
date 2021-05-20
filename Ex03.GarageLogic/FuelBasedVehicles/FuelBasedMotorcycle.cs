@@ -21,11 +21,18 @@ namespace Ex03.GarageLogic
                 i_RemainingFuelAmount, 6, eFuelType.Octan98);                                                     //for FuelBasedVehicle);
             LicenseType = i_LicenseType;
             EngineVolume = i_EngineVolume;
+            m_WheelArray = new List<Wheel>(2);
             for (int i = 0; i < 2; i++)
             {
+                Console.WriteLine("Log: adding wheel number " + i);
                 m_WheelArray.Add(new Wheel(i_WheelManufacturer, i_WheelCurrentAirPressure, 30));
             }
+            Console.WriteLine("Log: Finished creating motorcycle");
         }
-        
+
+        public override string ToString()
+        {
+            return base.ToString() + "License type: " + LicenseType + Environment.NewLine + "Engine Volume: " + EngineVolume + Environment.NewLine;
+        }
     }
 }

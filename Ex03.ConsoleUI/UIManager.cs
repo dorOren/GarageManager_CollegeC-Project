@@ -24,7 +24,7 @@ namespace Ex03.ConsoleUI
             Console.Clear();
             while (runGarage)
             {
-
+                
                 Menu.ShowMainMenu();
 
                 int chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(8);
@@ -72,11 +72,13 @@ namespace Ex03.ConsoleUI
             {
                 if (isVehicleExistsInGarage(licenseNumber))
                 {
+                    Console.WriteLine("Log: Vehicle exists in garage");
                     m_Garage.UpdateVehicleStatus(licenseNumber, eVehicleStatus.BeingRepaired);
                     PrintHandler.VehicleIsAlreadyExistsInGarage();
                 }
                 else
                 {
+                    Console.WriteLine("Log: Vehicle doesn't exists in garage.");
                     eVehicleType vehicleType = getChosenVehicleTypeAsEnum();
                     if (!vehicleType.Equals(eVehicleType.None))
                     {
@@ -91,19 +93,16 @@ namespace Ex03.ConsoleUI
                             {
                                 PrintHandler.AskForCurrentWheelAirPressure();
                                 currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
+                                valid = true;
                             }
                             catch (ArgumentException ex)
                             {
                                 PrintHandler.PrintException(ex, ex.Message);
-                                continue;
                             }
                             catch (FormatException ex)
                             {
                                 PrintHandler.PrintException(ex, "Illegal input entered.");
-                                continue;
                             }
-
-                            valid = true;
                         }
 
                         PrintHandler.AskForWheelManufacturer();
@@ -125,6 +124,8 @@ namespace Ex03.ConsoleUI
                             getNewTruckDetails(vehicle, modelName, licenseNumber, wheelManufacturer,
                                 currentWheelAirPressure);
                         }
+
+                        m_Garage.AddToVehiclesListDB(vehicle);
                     }
                 }
             }
@@ -223,6 +224,7 @@ namespace Ex03.ConsoleUI
 
                 }
                 getCustomerDetails(i_LicenseNumber);
+                
             }
         }
 
@@ -402,6 +404,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
+                    PrintHandler.AskForNumberOfDoors();
                     res = InputHandler.GetIntegerInputFromUser();
                 }
                 catch (ArgumentException ex)
@@ -486,8 +489,10 @@ namespace Ex03.ConsoleUI
 
         private void ShowFullVehicleData()
         {
+            PrintHandler.AskForLicenseNumber();
             string i_LicenseNumber = InputHandler.GetStringInputFromUser();
             StringBuilder vehicleDetails = m_Garage.ShowVehicleData(i_LicenseNumber);
+   
             PrintHandler.PrintVehicleDetails(vehicleDetails);
         }
 
@@ -500,13 +505,14 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
+                    PrintHandler.AskForAmountOfBatteryInMinutesToCharge();
                     int amountOfBatteryTimeToAdd = InputHandler.GetIntegerInputFromUser();
                     m_Garage.ChargeBattery(inputLicenseNumber, amountOfBatteryTimeToAdd);
                 }
                 catch (ArgumentException ex)
                 {
                     PrintHandler.PrintException(ex, ex.Message);
-                    continue;
+                    
                 }
                 catch (FormatException ex)
                 {
@@ -541,7 +547,6 @@ namespace Ex03.ConsoleUI
             }
             closeMenu = false;
             while (!closeMenu)
-
             {
                 try
                 {
@@ -552,7 +557,7 @@ namespace Ex03.ConsoleUI
                 catch (ArgumentException ex)
                 {
                     PrintHandler.PrintException(ex, ex.Message);
-                    continue;
+                    
                 }
                 catch (FormatException ex)
                 {
@@ -622,29 +627,30 @@ namespace Ex03.ConsoleUI
             while (!closeMenu)
             {
                 int statusChosen;
-                string inputLicenseNumber;
+                PrintHandler.AskForLicenseNumber();
+                string inputLicenseNumber = InputHandler.GetStringInputFromUser();
                 try
                 {
-                    PrintHandler.AskForLicenseNumber();
-                    inputLicenseNumber = InputHandler.GetStringInputFromUser();
+
                     PrintHandler.AskForVehicleStatus();
                     Menu.ShowUpdatingOptionsByVehicleStatusMenu();
                     statusChosen = InputHandler.GetChosenOptionInMenuFromUser(4);
+                    if (statusChosen == 4) break;
+                    m_Garage.UpdateVehicleStatus(inputLicenseNumber, (eVehicleStatus)statusChosen);
+                    closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
                     PrintHandler.PrintException(ex, ex.Message);
-                    continue;
                 }
                 catch (FormatException ex)
                 {
                     PrintHandler.PrintException(ex, "Illegal input entered.");
-                    continue;
                 }
-                if (statusChosen == 4) break;
+                
 
-                m_Garage.UpdateVehicleStatus(inputLicenseNumber, (eVehicleStatus) statusChosen);
-                closeMenu = true;
+                //m_Garage.UpdateVehicleStatus(inputLicenseNumber, (eVehicleStatus) statusChosen);
+                //closeMenu = true;
             }
 
 
@@ -683,6 +689,11 @@ namespace Ex03.ConsoleUI
                     Menu.ShowFilteringOptionsByVehicleStatusMenu();
                     PrintHandler.PrintList(resLicenses);
                 }
+                else
+                {
+                    PrintHandler.NoMatchingVehiclesInGarage();
+                }
+
 
                 closeMenu = true;
 

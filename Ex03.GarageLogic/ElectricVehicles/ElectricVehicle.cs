@@ -34,5 +34,10 @@ namespace Ex03.GarageLogic
                 RemainingBatteryTime += i_Hours;
             }
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + "Remaining Battery time: " + RemainingBatteryTime + Environment.NewLine + "Max battery time: " + MaxBatteryTime + Environment.NewLine;
+        }
     }
 }

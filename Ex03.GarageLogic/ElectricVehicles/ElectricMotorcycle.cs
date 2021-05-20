@@ -21,10 +21,16 @@ namespace Ex03.GarageLogic
                 i_RemainingBatteryTime, 1.8f);                                                     //for ElectricVehicle;
             LicenseType = i_LicenseType;
             EngineVolume = i_EngineVolume;
+            m_WheelArray = new List<Wheel>(2);
             for (int i = 0; i < 2; i++)
             {
                 m_WheelArray.Add(new Wheel(i_WheelManufacturer, i_WheelCurrentAirPressure, 30));
             }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + "License type: " + LicenseType + Environment.NewLine + "Engine Volume: " + EngineVolume + Environment.NewLine;
         }
     }
 }

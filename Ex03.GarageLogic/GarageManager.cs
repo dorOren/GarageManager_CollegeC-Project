@@ -60,7 +60,15 @@ namespace Ex03.GarageLogic
 
         public void UpdateVehicleStatus(string i_RegistrationNumber, eVehicleStatus i_VehicleStatus)
         {
-            m_Book.UpdateVehicleStatus(i_RegistrationNumber,i_VehicleStatus);
+            if(!(m_Book.FindKey(i_RegistrationNumber)))
+            {
+                throw new ArgumentException("Requested vehicle is not in the garage.");
+            }
+            else
+            {
+                m_Book.UpdateVehicleStatus(i_RegistrationNumber, i_VehicleStatus);
+            }
+            
         }
 
         public List<string> ShowAllVehiclesUnderCare(eVehicleStatus i_VehicleStatus)
@@ -149,6 +157,7 @@ namespace Ex03.GarageLogic
             }
         }
 
+        
         public StringBuilder ShowVehicleData(string i_RegistrationNumber)
         {
             Vehicle requestedVehicle = null;
@@ -263,36 +272,9 @@ namespace Ex03.GarageLogic
             return data;
         }
 
-        /*
-        public void SetMotorcycle(Vehicle i_Vehicle, eVehicleType i_VehicleType, string i_ModelName, string i_LicenseNumber, eLicenseType i_LicenseType, int i_EngineVolume)
+ public void AddToVehiclesListDB(Vehicle i_Vehicle)
         {
-            
-            ElectricMotorcycle electricMotorcycle = (i_Vehicle as ElectricMotorcycle);
-            electricMotorcycle.LicenseType = i_LicenseType;
-            electricMotorcycle.EngineVolume = i_EngineVolume;
-            electricMotorcycle.Model = i_ModelName;
-            electricMotorcycle.RegistrationNumber = i_LicenseNumber;
-            SetMotorcycleWheelsArray(i_Vehicle);
-            switch (i_VehicleType)
-            {
-                case eVehicleType.ElectricMotorcycle:
-                   
-                    
-                    
-                    break;
-                                                            
-
-            }
-            if (i_VehicleType.Equals(eVehicleType.FuelBasedMotorcycle))
-            {
-                FuelBasedMotorcycle.SetFields(i_ModelName, i_LicenseNumber, i_LicenseType, i_EngineVolume);
-            }
+            m_VehiclesInGarage.Add(i_Vehicle);
         }
-
-        public void UpdateVehicleStatus(string i_LicenseNumber, eVehicleStatus i_NewStatus)
-        {
-            
-        }
-        */
     }
 }
