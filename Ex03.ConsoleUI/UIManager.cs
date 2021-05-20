@@ -181,7 +181,7 @@ namespace Ex03.ConsoleUI
             return resColor;
         }
 
-        private eVehicleType getChosenVehicletypeAsEnum()
+        private eVehicleType getChosenVehicleTypeAsEnum()
         { // TODO: Add default value to enum class eVehicleType
             eVehicleType chosenTypeResult = eVehicleType.None;
             PrintHandler.AskToChooseVehicleType();

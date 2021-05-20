@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ex03.GarageLogic.Enums;
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {
@@ -51,7 +52,7 @@ namespace Ex03.GarageLogic
 
             if (!found)
             {
-                throw new Exception("Requested vehicle is not in the garage.");
+                throw new IllegalRequestException("Requested vehicle is not in the garage.");
             }
 
             return requestedVehicle as Vehicle;
@@ -95,7 +96,7 @@ namespace Ex03.GarageLogic
                     }
                     else
                     {
-                        throw new Exception("Requested fuel Type does not match vehicle's fuel type.");
+                        throw new IllegalRequestException("Requested fuel Type does not match vehicle's fuel type.");
                     }
 
                 }
@@ -107,7 +108,7 @@ namespace Ex03.GarageLogic
                     }
                     else
                     {
-                        throw new Exception("Requested fuel Type does not match vehicle's fuel type.");
+                        throw new IllegalRequestException("Requested fuel Type does not match vehicle's fuel type.");
                     }
                 }
                 else if (vehicle is Truck)
@@ -118,14 +119,14 @@ namespace Ex03.GarageLogic
                     }
                     else
                     {
-                        throw new Exception("Requested fuel Type does not match vehicle's fuel type.");
+                        throw new IllegalRequestException("Requested fuel Type does not match vehicle's fuel type.");
                     }
                 }
 
             }
             else
             {
-                throw new Exception("This vehicle is not fuel based.");
+                throw new IllegalRequestException("This vehicle is not fuel based.");
             }
         }
 
@@ -139,7 +140,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new Exception("This vehicle is not electric.");
+                throw new IllegalRequestException("This vehicle is not electric.");
             }
         }
 
