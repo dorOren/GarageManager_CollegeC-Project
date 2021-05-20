@@ -8,12 +8,14 @@ namespace Ex03.ConsoleUI
 {
     class InputHandler
     {
-        public static int GetChosenOptionInMenuFromUser()
+        public static int GetChosenOptionInMenuFromUser(int i_NumberOfOptions)
         {
-            int res = 0;
             string input = Console.ReadLine();
-            int chosenOpt;
-            int.TryParse(input, out chosenOpt);
+            int chosenOpt = int.Parse(input);
+            if (i_NumberOfOptions < chosenOpt || chosenOpt<1)
+            {
+                throw new ArgumentException("Illegal option.");
+            }
             return chosenOpt;
         }
 
@@ -26,8 +28,7 @@ namespace Ex03.ConsoleUI
         public static float GetFloatInputFromUser()
         {
             string input = Console.ReadLine();
-            float chosenOpt;
-            float.TryParse(input, out chosenOpt);
+            float chosenOpt= float.Parse(input);
             return chosenOpt;
         }
 
@@ -35,15 +36,15 @@ namespace Ex03.ConsoleUI
         public static int GetIntegerInputFromUser()
         {
             string input = Console.ReadLine();
-            int chosenOpt;
-            int.TryParse(input, out chosenOpt);
+            int chosenOpt= int.Parse(input);
             return chosenOpt;
         }
 
         public static bool GetBooleanInputFromUser()
         {
-            bool res;
-    
+            string input = Console.ReadLine();
+            bool res= bool.Parse(input);
+            return res;
         }
     }
 }

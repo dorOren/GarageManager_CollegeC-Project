@@ -23,6 +23,18 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(sb);
         }
 
+        public static void ShowUpdatingOptionsByVehicleStatusMenu()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("================================================").AppendLine()
+                .Append("1. Update to status 'Paid").AppendLine()
+                .Append("2. Update to status 'In Repair'").AppendLine()
+                .Append("3. Update to status 'Repaired'").AppendLine()
+                .Append("4. Go back").AppendLine()
+                .Append("================================================");
+            Console.WriteLine(sb);
+        }
+
         public static void ShowFilteringOptionsByVehicleStatusMenu()
         {
             StringBuilder sb = new StringBuilder();

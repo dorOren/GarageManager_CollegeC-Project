@@ -59,5 +59,10 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Cannot add the desired Vehicle, as it's already exists in the garage. Current status is: in repair.");
         }
+
+        public static void PrintException(Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 }

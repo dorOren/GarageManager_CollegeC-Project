@@ -58,46 +58,21 @@ namespace Ex03.GarageLogic
             return requestedVehicle as Vehicle;
         }
 
-        public void UpdateVehicleStatus(string i_i_RegistrationNumber, eVehicleStatus i_VehicleStatus)
+        public void UpdateVehicleStatus(string i_RegistrationNumber, eVehicleStatus i_VehicleStatus)
         {
-            m_Book.UpdateVehicleStatus(i_i_RegistrationNumber,i_VehicleStatus);
+            m_Book.UpdateVehicleStatus(i_RegistrationNumber,i_VehicleStatus);
         }
 
-        private float calculateRemainingPowerPercentage(eVehicleType i_VehicleType, float i_RemainingPowerAmountInVehicle)
+        public List<string> ShowAllVehiclesUnderCare(eVehicleStatus i_VehicleStatus)
         {
-            float res = 0;
-            switch (i_VehicleType)
-            {
-                case eVehicleType.ElectricMotorcycle:
-                    res = i_RemainingPowerAmountInVehicle / 1.8f;
-                    break;
-                case eVehicleType.FuelBasedMotorcycle:
-                    res = i_RemainingPowerAmountInVehicle / 6f;
-                    break;
-                case eVehicleType.ElectricCar:
-                    res = i_RemainingPowerAmountInVehicle / 3.2f;
-                    break;
-                case eVehicleType.FuelBasedCar:
-                    res = i_RemainingPowerAmountInVehicle / 45f;
-                    break;
-                case eVehicleType.Truck:
-                    res = i_RemainingPowerAmountInVehicle / 120f;
-                    break;
-            }
-
-            return res;
-        }
-
-        public StringBuilder ShowAllVehiclesUnderCare(eVehicleStatus i_VehicleStatus)
-        {
-            StringBuilder data = new StringBuilder();
-            data.Append($"List of all vehicle's registration numbers in garage:{Environment.NewLine}");
+            List<string> data = new List<string>();
+            data.Append("List of all vehicle's registration numbers in garage:");
             foreach (Vehicle vehicle in m_VehiclesInGarage)
             {
                 CustomerData customerData = m_Book.GetCustomerData(vehicle.RegistrationNumber);
                 if (customerData.VehicleStatus.Equals(i_VehicleStatus) || i_VehicleStatus.Equals(eVehicleStatus.Any))
                 {
-                    data.Append($"{vehicle.RegistrationNumber}{Environment.NewLine}");
+                    data.Append(vehicle.RegistrationNumber);
                 }
             }
 

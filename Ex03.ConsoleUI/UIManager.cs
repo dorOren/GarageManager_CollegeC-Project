@@ -27,7 +27,7 @@ namespace Ex03.ConsoleUI
 
                 Menu.ShowMainMenu();
 
-                int chosenOpt = InputHandler.GetChosenOptionInMenuFromUser();
+                int chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(8);
                 switch (chosenOpt)
                 {
                     case 1:
@@ -79,34 +79,59 @@ namespace Ex03.ConsoleUI
                 eVehicleType vehicleType = getChosenVehicleTypeAsEnum();
                 string modelName = InputHandler.GetStringInputFromUser();
                 float currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
+                PrintHandler.AskForWheelManufacturer();
+                string wheelManufacturer = InputHandler.GetStringInputFromUser();
                 Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
                 if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) || vehicleType.Equals(eVehicleType.ElectricMotorcycle))
                 {
                     eLicenseType licenseType = getMotorCycleLicenseType();
                     int engineVolume = InputHandler.GetIntegerInputFromUser();
+                    if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle))
+                    {
+                        PrintHandler.AskForCurrentFuelAmount();
+                        float currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                        (vehicle as FuelBasedMotorcycle).SetFields(modelName, licenseNumber, currentFuelAmount, licenseType, engineVolume, wheelManufacturer, currentWheelAirPressure);
+                    }
+                    else
+                    {
+                        PrintHandler.AskForCurrentBatteryTime();
+                        float currentBatteryTime = InputHandler.GetFloatInputFromUser();
+                        (vehicle as ElectricMotorcycle).SetFields(modelName, licenseNumber, currentBatteryTime, licenseType, engineVolume, wheelManufacturer, currentWheelAirPressure);
 
-                    (vehicle as FuelBasedMotorcycle).SetFields(modelName, licenseNumber, licenseType, engineVolume);
+                    }
+
                 }
                 else if (vehicleType.Equals(eVehicleType.FuelBasedCar) || vehicleType.Equals(eVehicleType.ElectricCar))
                 {
+
                     eColor chosenColor = getColorFromUser();
                     int numDoors = getNumberOfDoorsFromUSer();
-                        //m_Garage.SetFuelBasedCar(vehicle, vehicleType, modelName, licenseNumber, chosenColor, numDoors);
-                        (vehicle as FuelBasedCar).SetFields();
+                    if (vehicleType.Equals(eVehicleType.FuelBasedCar))
+                    {
+                        PrintHandler.AskForCurrentFuelAmount();
+                        float currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                        (vehicle as FuelBasedCar).SetFields(modelName, licenseNumber, currentFuelAmount, chosenColor, numDoors, wheelManufacturer, currentWheelAirPressure);
+                    }
+                    else
+                    {
+                        PrintHandler.AskForCurrentBatteryTime();
+                        float currentBatteryTime = InputHandler.GetFloatInputFromUser();
+                        (vehicle as ElectricCar).SetFields(modelName, licenseNumber, currentBatteryTime, chosenColor, numDoors, wheelManufacturer, currentWheelAirPressure);
+                    }
+
                 }
                 else if (vehicleType.Equals(eVehicleType.Truck))
                 {
-                    bool isCarryingDangerousCargo = InputHandler.GetBooleanInputFromUser();
-                    float maxCarryingWeight = InputHandler.GetFloatInputFromUser();
-                    m_Garage.SetTruck(vehicle, vehicleType, modelName, licenseNumber, isCarryingDangerousCargo, maxCarryingWeight);
-                }
-                // TODO: get owner details and send to GarageManager to insert to phonebook.
-            }
-            
 
-            
-            
-            
+                    bool isCarryingDangerousCargo = isTruckCarryingDangerousCargo();
+                    float maxCarryingWeight = InputHandler.GetFloatInputFromUser();
+                    PrintHandler.AskForCurrentFuelAmount();
+                    float currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                    (vehicle as Truck).SetFields(modelName, licenseNumber, currentFuelAmount, isCarryingDangerousCargo, maxCarryingWeight, wheelManufacturer, currentWheelAirPressure);
+                }
+                // TODO: get owner details and send to GarageManager to insert to phonebook. AddCustomerDetailsToBook
+                getCustomerDetails(licenseNumber);
+            }
 
         }
 
@@ -119,7 +144,7 @@ namespace Ex03.ConsoleUI
         {
             PrintHandler.AskForMotorcycleLicenseType();
             Menu.ShowMotorcycleLicenseTypes();
-            int chosenType = InputHandler.GetChosenOptionInMenuFromUser();
+            int chosenType = InputHandler.GetChosenOptionInMenuFromUser(4);
             eLicenseType resLicenseType = eLicenseType.None;
             switch(chosenType)
             {
@@ -188,7 +213,7 @@ namespace Ex03.ConsoleUI
             eVehicleType chosenTypeResult = eVehicleType.None;
             PrintHandler.AskToChooseVehicleType();
             Menu.ShowPossibleVehicleTypes();
-            int chosenVehicleOpt = InputHandler.GetChosenOptionInMenuFromUser();
+            int chosenVehicleOpt = InputHandler.GetChosenOptionInMenuFromUser(5);
             switch (chosenVehicleOpt)
             {
                 case 1:
@@ -243,7 +268,7 @@ namespace Ex03.ConsoleUI
 
         private eFuelType getFuelTypeAndConvertToEnum()
         {
-            int chosenFuelType = InputHandler.GetChosenOptionInMenuFromUser();
+            int chosenFuelType = InputHandler.GetChosenOptionInMenuFromUser(4);
             eFuelType typeResult = eFuelType.None;
             switch (chosenFuelType)
             {
@@ -281,8 +306,8 @@ namespace Ex03.ConsoleUI
             string inputLicenseNumber = InputHandler.GetStringInputFromUser();
 
             Console.WriteLine("Choose the vehicle's new status: ");
-            Menu.ShowFilteringOptionsByVehicleStatusMenu();
-            int statusChosen = InputHandler.GetChosenOptionInMenuFromUser();
+            Menu.ShowUpdatingOptionsByVehicleStatusMenu();
+            int statusChosen = InputHandler.GetChosenOptionInMenuFromUser(4);
             switch (statusChosen)
             {
                 case 1:
@@ -305,14 +330,27 @@ namespace Ex03.ConsoleUI
         }
 
         private void showLicenseNumbersInGarage()
-        {//TODO: add an "any" option to see all vehicles with all statuses ~ Dor
+        {
             bool runMenu = true;
             Console.Clear();
             while (runMenu)
             {
-
+                int chosenOpt = -1;
                 Menu.ShowFilteringOptionsByVehicleStatusMenu();
-                int chosenOpt = InputHandler.GetChosenOptionInMenuFromUser();
+                try
+                {
+                    chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(5);
+                }
+                catch (ArgumentException ex)
+                {
+                    PrintHandler.PrintException(ex);
+                }
+                catch (FormatException ex)
+                {
+                    PrintHandler.PrintException(ex);
+                }
+
+                if (chosenOpt == -1) continue;
                 List<string> resLicenses = new List<string>();
                 switch (chosenOpt)
                 {
@@ -335,6 +373,7 @@ namespace Ex03.ConsoleUI
                         PrintHandler.IllegalOptionOutput();
                         break;
                 }
+
                 if (resLicenses.Count > 0)
                 {
                     Console.Clear();
