@@ -64,10 +64,10 @@ namespace Ex03.ConsoleUI
         {// TODO: Convert to eFuelTypes.XX.ToString()
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
-                .Append("1. Soler").AppendLine()
-                .Append("2. Octan 95").AppendLine()
-                .Append("3. Octan 96").AppendLine()
-                .Append("4. Octan 98").AppendLine()
+                .Append("1. Octan 95").AppendLine()
+                .Append("2. Octan 96").AppendLine()
+                .Append("3. Octan 98").AppendLine()
+                .Append("4. Soler").AppendLine()
                 .Append("5. Go back").AppendLine()
                 .Append("================================================");
             Console.WriteLine(sb);
@@ -78,7 +78,7 @@ namespace Ex03.ConsoleUI
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine().Append("1. Motorcycle")
                 .AppendLine().Append("2. Electrical Motorcycle").AppendLine().Append("3. Car").AppendLine()
-                .Append("4. Electrical Car").AppendLine().Append("5. Truck").AppendLine()
+                .Append("4. Electrical Car").AppendLine().Append("5. Truck").AppendLine().Append("6. Go back").AppendLine()
                 .Append("================================================");
         }
 

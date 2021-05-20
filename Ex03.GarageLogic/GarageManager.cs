@@ -151,8 +151,17 @@ namespace Ex03.GarageLogic
 
         public StringBuilder ShowVehicleData(string i_RegistrationNumber)
         {
-            Vehicle requestedVehicle = FindVehicleInGarage(i_RegistrationNumber);
+            Vehicle requestedVehicle = null;
             StringBuilder data = new StringBuilder();
+            try
+            {
+                requestedVehicle = FindVehicleInGarage(i_RegistrationNumber);
+            }
+            catch
+            {
+                data.AppendLine("There are no vehicles in the garage.");
+                return data;
+            }
 
             data.Append(AddBookData(i_RegistrationNumber));
             data.Append(AddVehicleData(requestedVehicle));

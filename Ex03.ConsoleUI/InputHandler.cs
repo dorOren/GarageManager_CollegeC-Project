@@ -14,7 +14,7 @@ namespace Ex03.ConsoleUI
             int chosenOpt = int.Parse(input);
             if (i_NumberOfOptions < chosenOpt || chosenOpt<1)
             {
-                throw new ArgumentException("Illegal option.");
+                throw new ArgumentException("You chose an illegal option from the menu.");
             }
             return chosenOpt;
         }
