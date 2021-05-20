@@ -39,11 +39,6 @@ namespace Ex03.ConsoleUI
             int.TryParse(input, out chosenOpt);
             return chosenOpt;
         }
-
-        public static bool GetBooleanInputFromUser()
-        {
-            bool res;
-    
-        }
+        
     }
 }

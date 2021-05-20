@@ -79,35 +79,77 @@ namespace Ex03.ConsoleUI
                 eVehicleType vehicleType = getChosenVehicleTypeAsEnum();
                 string modelName = InputHandler.GetStringInputFromUser();
                 float currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
+                PrintHandler.AskForWheelManufacturer();
+                string wheelManufacturer = InputHandler.GetStringInputFromUser();
                 Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
                 if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) || vehicleType.Equals(eVehicleType.ElectricMotorcycle))
                 {
                     eLicenseType licenseType = getMotorCycleLicenseType();
                     int engineVolume = InputHandler.GetIntegerInputFromUser();
+                    if(vehicleType.Equals(eVehicleType.FuelBasedMotorcycle))
+                    {
+                        PrintHandler.AskForCurrentFuelAmount();
+                        float currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                        (vehicle as FuelBasedMotorcycle).SetFields(modelName,licenseNumber,currentFuelAmount,licenseType,engineVolume,wheelManufacturer,currentWheelAirPressure);
+                    }
+                    else
+                    {
+                        PrintHandler.AskForCurrentBatteryTime();
+                        float currentBatteryTime = InputHandler.GetFloatInputFromUser();
+                        (vehicle as ElectricMotorcycle).SetFields(modelName,licenseNumber, currentBatteryTime,licenseType,engineVolume,wheelManufacturer,currentWheelAirPressure);
 
-                    (vehicle as FuelBasedMotorcycle).SetFields(modelName, licenseNumber, licenseType, engineVolume);
+                    }
+                    
                 }
                 else if (vehicleType.Equals(eVehicleType.FuelBasedCar) || vehicleType.Equals(eVehicleType.ElectricCar))
                 {
+                    
                     eColor chosenColor = getColorFromUser();
                     int numDoors = getNumberOfDoorsFromUSer();
-                        //m_Garage.SetFuelBasedCar(vehicle, vehicleType, modelName, licenseNumber, chosenColor, numDoors);
-                        (vehicle as FuelBasedCar).SetFields();
+                    if (vehicleType.Equals(eVehicleType.FuelBasedCar))
+                    {
+                        PrintHandler.AskForCurrentFuelAmount();
+                        float currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                        (vehicle as FuelBasedCar).SetFields(modelName,licenseNumber,currentFuelAmount,chosenColor,numDoors,wheelManufacturer,currentWheelAirPressure);
+                    }
+                    else
+                    {
+                        PrintHandler.AskForCurrentBatteryTime();
+                        float currentBatteryTime = InputHandler.GetFloatInputFromUser();
+                        (vehicle as ElectricCar).SetFields(modelName,licenseNumber,currentBatteryTime,chosenColor,numDoors,wheelManufacturer,currentWheelAirPressure);
+                    }
+                        
                 }
                 else if (vehicleType.Equals(eVehicleType.Truck))
                 {
-                    bool isCarryingDangerousCargo = InputHandler.GetBooleanInputFromUser();
+                    
+                    bool isCarryingDangerousCargo = isTruckCarryingDangerousCargo();
                     float maxCarryingWeight = InputHandler.GetFloatInputFromUser();
-                    m_Garage.SetTruck(vehicle, vehicleType, modelName, licenseNumber, isCarryingDangerousCargo, maxCarryingWeight);
+                    PrintHandler.AskForCurrentFuelAmount();
+                    float currentFuelAmount = InputHandler.GetFloatInputFromUser();
+                    (vehicle as Truck).SetFields(modelName,licenseNumber,currentFuelAmount,isCarryingDangerousCargo,maxCarryingWeight,wheelManufacturer,currentWheelAirPressure);
                 }
-                // TODO: get owner details and send to GarageManager to insert to phonebook.
+                // TODO: get owner details and send to GarageManager to insert to phonebook. AddCustomerDetailsToBook
+                getCustomerDetails(licenseNumber);
             }
             
+        }
 
-            
-            
-            
+        private void getCustomerDetails(string i_LicenseNumber)
+        {
+            PrintHandler.AskForOwnerName();
+            string ownerName = InputHandler.GetStringInputFromUser();
+            PrintHandler.AskForOwnerPhone();
+            string ownerPhone = InputHandler.GetStringInputFromUser();
+            m_Garage.AddCustomerDetailsToBook(ownerName,ownerPhone,i_LicenseNumber);
+        }
 
+        private bool isTruckCarryingDangerousCargo()
+        {
+            PrintHandler.AskIfTruckIsCarryingDangerousCargo();
+            string chosenOpt = InputHandler.GetStringInputFromUser();
+            bool res = char.Parse(chosenOpt) == 'y';
+            return res;
         }
 
         private bool isVehicleExistsInGarage(string i_LicenseNumber)
