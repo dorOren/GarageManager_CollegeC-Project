@@ -60,6 +60,36 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Cannot add the desired Vehicle, as it's already exists in the garage. Current status is: in repair.");
         }
 
+        public static void AskForCurrentFuelAmount()
+        {
+            Console.WriteLine("\nEnter current fuel amount: ");
+        }
+
+        public static void AskForWheelManufacturer()
+        {
+            Console.WriteLine("\nEnter wheels manufacturer: ");
+        }
+
+        public static void AskForCurrentBatteryTime()
+        {
+            Console.WriteLine("\nEnter current battery time remaining: ");
+        }
+
+        public static void AskIfTruckIsCarryingDangerousCargo()
+        {
+            Console.WriteLine("\nType 'y' if truck is carrying dangerous cargo, else type 'n'");
+        }
+
+        public static void AskForOwnerName()
+        {
+            Console.WriteLine("\nEnter your name: ");
+        }
+
+        public static void AskForOwnerPhone()
+        {
+            Console.WriteLine("\nEnter your phone number: ");
+        }
+
         public static void PrintException(Exception ex)
         {
             Console.WriteLine(ex);
