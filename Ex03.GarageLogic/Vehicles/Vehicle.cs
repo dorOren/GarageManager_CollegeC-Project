@@ -24,8 +24,8 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return "Model: " + Model + Environment.NewLine + "License number: " + RegistrationNumber
-                   + Environment.NewLine + "Energy Precentage: " + EnergyPercentage + Environment.NewLine;
+            return string.Format("Model: {0}{1}License number:  {2}{1}Energy Precentage: {3}{1}",
+                Model, Environment.NewLine, RegistrationNumber, EnergyPercentage);
         }
     }
 }

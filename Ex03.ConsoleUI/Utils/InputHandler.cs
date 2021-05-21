@@ -8,7 +8,7 @@ namespace Ex03.ConsoleUI
 {
     class InputHandler
     {
-        public static int GetChosenOptionInMenuFromUser(int i_NumberOfOptions)
+        public int GetChosenOptionInMenuFromUser(int i_NumberOfOptions)
         {
             string input = Console.ReadLine();
             int chosenOpt = int.Parse(input);
@@ -19,13 +19,13 @@ namespace Ex03.ConsoleUI
             return chosenOpt;
         }
 
-        public static string GetStringInputFromUser()
+        public string GetStringInputFromUser()
         {
             string input = Console.ReadLine();
             return input;
         }
 
-        public static float GetFloatInputFromUser()
+        public float GetFloatInputFromUser()
         {
             string input = Console.ReadLine();
             float chosenOpt= float.Parse(input);
@@ -33,14 +33,14 @@ namespace Ex03.ConsoleUI
         }
 
 
-        public static int GetIntegerInputFromUser()
+        public int GetIntegerInputFromUser()
         {
             string input = Console.ReadLine();
             int chosenOpt= int.Parse(input);
             return chosenOpt;
         }
 
-        public static bool GetBooleanInputFromUser()
+        public bool GetBooleanInputFromUser()
         {
             string input = Console.ReadLine();
             bool res = char.Parse(input) == 'y';

@@ -49,7 +49,7 @@ namespace Ex03.ConsoleUI
         }
 
         public static void ShowVehicleStatusOptions()
-        {//TODO: Convert to eStatus.XX.ToString()
+        {
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
                 .Append("1. 'Paid").AppendLine()
@@ -61,7 +61,7 @@ namespace Ex03.ConsoleUI
         }
 
         public static void ShowFuelTypes()
-        {// TODO: Convert to eFuelTypes.XX.ToString()
+        {
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
                 .Append("1. Octan 95").AppendLine()

@@ -33,9 +33,8 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            
-            return base.ToString() + Environment.NewLine + "Is carrying dangerous cargo: " + IsCarryingDangerousMaterials + Environment.NewLine
-                   + "Max carry weight: " + MaxCarryWeight + Environment.NewLine;
+            return string.Format("{0}{1}Is carrying dangerous cargo: {1}{2}Max carry weight: {3}{2}",
+                base.ToString(), IsCarryingDangerousMaterials, Environment.NewLine, MaxCarryWeight);
         }
     }
 }

@@ -39,25 +39,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerData.cs" />
-    <Compile Include="CustomersDetailsBook.cs" />
+    <Compile Include="CustomersDetailsBook\CustomerData.cs" />
+    <Compile Include="CustomersDetailsBook\CustomersDetailsBook.cs" />
     <Compile Include="Enums\eLicenseType.cs" />
     <Compile Include="Enums\eVehicleStatus.cs" />
     <Compile Include="Enums\eColor.cs" />
     <Compile Include="Enums\eFuelType.cs" />
-    <Compile Include="ElectricVehicles\ElectricCar.cs" />
-    <Compile Include="ElectricVehicles\ElectricMotorcycle.cs" />
-    <Compile Include="ElectricVehicles\ElectricVehicle.cs" />
+    <Compile Include="Vehicles\ElectricVehicles\ElectricCar.cs" />
+    <Compile Include="Vehicles\ElectricVehicles\ElectricMotorcycle.cs" />
+    <Compile Include="Vehicles\ElectricVehicles\ElectricVehicle.cs" />
     <Compile Include="Enums\eVehicleType.cs" />
-    <Compile Include="FuelBasedVehicles\FuelBasedCar.cs" />
-    <Compile Include="FuelBasedVehicles\FuelBasedMotorcycle.cs" />
-    <Compile Include="FuelBasedVehicles\FuelBasedVehicle.cs" />
-    <Compile Include="FuelBasedVehicles\Truck.cs" />
-    <Compile Include="GarageManager.cs" />
+    <Compile Include="Vehicles\FuelBasedVehicles\FuelBasedCar.cs" />
+    <Compile Include="Vehicles\FuelBasedVehicles\FuelBasedMotorcycle.cs" />
+    <Compile Include="Vehicles\FuelBasedVehicles\FuelBasedVehicle.cs" />
+    <Compile Include="Vehicles\FuelBasedVehicles\Truck.cs" />
+    <Compile Include="Logic\GarageManager.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
-    <Compile Include="Vehicle.cs" />
-    <Compile Include="VehicleFactory.cs" />
-    <Compile Include="Wheel.cs" />
+    <Compile Include="Vehicles\Vehicle.cs" />
+    <Compile Include="Logic\VehicleFactory.cs" />
+    <Compile Include="Vehicles\Wheel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

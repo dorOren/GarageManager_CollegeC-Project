@@ -7,7 +7,7 @@ using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    public class ElectricVehicle : Vehicle
+    public abstract class ElectricVehicle : Vehicle
     {
         public float RemainingBatteryTime { get; set; }
         public float MaxBatteryTime { get; set; }
@@ -46,7 +46,8 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString() + "Remaining Battery time: " + RemainingBatteryTime + Environment.NewLine + "Max battery time: " + MaxBatteryTime + Environment.NewLine;
+            return string.Format("{0} Remaining Battery time: {1}{2}Max battery time: {3}{2}", 
+                base.ToString(), RemainingBatteryTime, Environment.NewLine, MaxBatteryTime);
         }
     }
 }

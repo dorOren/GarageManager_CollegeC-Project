@@ -29,7 +29,8 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return base.ToString() + "Color: " + Color + Environment.NewLine + "Number of doors: " + NumberOfDoors + Environment.NewLine;
+            return string.Format("{0}Color: {1}{2}Number of doors: {1}{2}",
+                base.ToString(), Color, Environment.NewLine, NumberOfDoors);
         }
     }
 }

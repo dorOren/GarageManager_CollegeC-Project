@@ -7,7 +7,7 @@ using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    public class FuelBasedVehicle : Vehicle
+    public abstract class FuelBasedVehicle : Vehicle
     {
         public eFuelType FuelType { get; set; }
         public float RemainingFuelAmount { get; set; }
@@ -48,9 +48,9 @@ namespace Ex03.GarageLogic
         }
 
         public override string ToString()
-        {
-            return base.ToString() + Environment.NewLine + "Fuel type: " + FuelType.ToString() + Environment.NewLine
-                   + "Remaining fuel amount: " + RemainingFuelAmount + Environment.NewLine + "Max fuel amount: " + MaxFuelAmount + Environment.NewLine;
+        { 
+            return string.Format("{0}{2}Fuel type: {1}{2}Remaining fuel amount: {3}{2}Max fuel amount: {4}{2}",
+                base.ToString(), FuelType.ToString(), Environment.NewLine, RemainingFuelAmount, MaxFuelAmount);
         }
     }
 }

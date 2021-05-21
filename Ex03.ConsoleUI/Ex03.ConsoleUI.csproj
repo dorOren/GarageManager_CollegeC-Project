@@ -36,11 +36,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InputHandler.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="PrintHandler.cs" />
+    <Compile Include="Utils\InputHandler.cs" />
+    <Compile Include="UI\Menu.cs" />
+    <Compile Include="Utils\PrintHandler.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="UIManager.cs" />
+    <Compile Include="UI\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
@@ -48,5 +48,6 @@
       <Name>Ex03.GarageLogic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
