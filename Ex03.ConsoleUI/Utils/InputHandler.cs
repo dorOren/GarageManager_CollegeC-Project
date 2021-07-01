@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ex03.ConsoleUI
 {
-    class InputHandler
+    public class InputHandler
     {
-        public int GetChosenOptionInMenuFromUser(int i_NumberOfOptions)
+        public static int GetChosenOptionInMenuFromUser(int i_NumberOfOptions)
         {
             string input = Console.ReadLine();
             int chosenOpt = int.Parse(input);
@@ -19,13 +19,13 @@ namespace Ex03.ConsoleUI
             return chosenOpt;
         }
 
-        public string GetStringInputFromUser()
+        public static string GetStringInputFromUser()
         {
             string input = Console.ReadLine();
             return input;
         }
 
-        public float GetFloatInputFromUser()
+        public static float GetFloatInputFromUser()
         {
             string input = Console.ReadLine();
             float chosenOpt= float.Parse(input);
@@ -33,14 +33,14 @@ namespace Ex03.ConsoleUI
         }
 
 
-        public int GetIntegerInputFromUser()
+        public static int GetIntegerInputFromUser()
         {
             string input = Console.ReadLine();
             int chosenOpt= int.Parse(input);
             return chosenOpt;
         }
 
-        public bool GetBooleanInputFromUser()
+        public static bool GetBooleanInputFromUser()
         {
             string input = Console.ReadLine();
             bool res = char.Parse(input) == 'y';

@@ -11,9 +11,9 @@ namespace Ex03.GarageLogic
 {
     public class GarageManager
     {
-        private CustomersDetailsBook m_Book;
-        private VehicleFactory m_Factory;
-        private List<Vehicle> m_VehiclesInGarage;
+        private readonly CustomersDetailsBook m_Book;
+        private readonly VehicleFactory m_Factory;
+        private readonly List<Vehicle> m_VehiclesInGarage;
 
         public GarageManager()
         {

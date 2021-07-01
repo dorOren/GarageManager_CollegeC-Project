@@ -43,9 +43,9 @@
     <Compile Include="UI\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
+    <ProjectReference Include="..\Ex03.GarageLogic\GarageLogic.csproj">
       <Project>{3845603b-4746-4e43-bdbf-6d559bc22825}</Project>
-      <Name>Ex03.GarageLogic</Name>
+      <Name>GarageLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

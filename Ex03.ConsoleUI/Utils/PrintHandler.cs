@@ -6,131 +6,131 @@ using System.Threading.Tasks;
 
 namespace Ex03.ConsoleUI
 {
-    public class PrintHandler
+    public static class PrintHandler
     {
-        public void IllegalOptionOutput()
+        public static void IllegalOptionOutput()
         {
             Console.WriteLine("Error: Illegal option entered. Please try again.");
         }
 
-        public void PrintList<T>(List<T> i_List)
+        public static void PrintList<T>(List<T> i_List)
         {
             foreach (T item in i_List)
             {
                 Console.WriteLine(item);
             }
         }
-        public void PrintVehicleDetails(StringBuilder i_Details)
+        public static void PrintVehicleDetails(StringBuilder i_Details)
         {
             Console.WriteLine(i_Details);
         }
-        public void AskForLicenseNumber()
+        public static void AskForLicenseNumber()
         {
             Console.WriteLine("Please enter license number: ");
         }
 
-        public void AskForVehicleStatus()
+        public static void AskForVehicleStatus()
         {
             Console.WriteLine("Choose the vehicle's new status: ");
         }
 
-        public void AskToChooseFuelType()
+        public static void AskToChooseFuelType()
         {
             Console.WriteLine("Please choose the desired fuel type: ");
         }
 
-        public void AskForFuelingAmount()
+        public static void AskForFuelingAmount()
         {
             Console.WriteLine("Please enter the desired fuel amount: ");
         }
 
-        public void AskToChooseVehicleType()
+        public static void AskToChooseVehicleType()
         {
             Console.WriteLine("Please choose the desired vehicle type:");
         }
 
-        public void AskForColor()
+        public static void AskForColor()
         {
             Console.WriteLine("Choose the car's color:");
         }
 
-        public void AskForMotorcycleLicenseType()
+        public static void AskForMotorcycleLicenseType()
         {
             Console.WriteLine("Choose license type:");
         }
 
-        public void VehicleIsAlreadyExistsInGarage()
+        public static void VehicleIsAlreadyExistsInGarage()
         {
             Console.WriteLine("Cannot add the desired Vehicle, as it's already exists in the garage. Current status is: in repair.");
         }
 
-        public void AskForCurrentFuelAmount()
+        public static void AskForCurrentFuelAmount()
         {
             Console.WriteLine("Enter current fuel amount: ");
         }
 
-        public void AskForWheelManufacturer()
+        public static void AskForWheelManufacturer()
         {
             Console.WriteLine("Enter wheels manufacturer:" + Environment.NewLine);
         }
 
-        public void AskForCurrentBatteryTime()
+        public static void AskForCurrentBatteryTime()
         {
             Console.WriteLine("Enter current battery time remaining: ");
         }
 
-        public void AskForMaxCarryingWeight()
+        public static void AskForMaxCarryingWeight()
         {
             Console.WriteLine("Enter maximum carrying weight: ");
         }
 
-        public void AskIfTruckIsCarryingDangerousCargo()
+        public static void AskIfTruckIsCarryingDangerousCargo()
         {
             Console.WriteLine("Type 'y' if truck is carrying dangerous cargo, else type 'n'");
         }
 
-        public void AskForVehicleModel()
+        public static void AskForVehicleModel()
         {
             Console.WriteLine("Enter vehicle model: ");
         }
 
-        public void AskForCurrentWheelAirPressure()
+        public static void AskForCurrentWheelAirPressure()
         {
             Console.WriteLine("Enter current air pressure of car's wheels: ");
         }
 
-        public void AskForEngineVolume()
+        public static void AskForEngineVolume()
         {
             Console.WriteLine("Enter engine volume: ");
         }
 
-        public void AskForOwnerName()
+        public static void AskForOwnerName()
         {
             Console.WriteLine("Enter your name: ");
         }
 
-        public void AskForOwnerPhone()
+        public static void AskForOwnerPhone()
         {
             Console.WriteLine("Enter your phone number (8 to 10 digits): ");
         }
 
-        public void PrintException(Exception ex, string msg)
+        public static void PrintException(Exception ex, string msg)
         {
             Console.WriteLine($"{msg}{Environment.NewLine}");
         }
 
 
-        public void AskForAmountOfBatteryInMinutesToCharge()
+        public static void AskForAmountOfBatteryInMinutesToCharge()
         {
             Console.WriteLine("Enter the amount of battery minutes you want to charge: " + Environment.NewLine);
         }
 
-        public void NoMatchingVehiclesInGarage()
+        public static void NoMatchingVehiclesInGarage()
         {
             Console.WriteLine("No matching vehicles in garage" + Environment.NewLine);
         }
 
-        public void AskForNumberOfDoors()
+        public static void AskForNumberOfDoors()
         {
             Console.WriteLine("Enter number of doors (2 to 5): ");
         }

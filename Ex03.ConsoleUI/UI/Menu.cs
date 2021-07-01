@@ -15,10 +15,12 @@ namespace Ex03.ConsoleUI
             sb.Append("================================================").AppendLine()
                 .Append("1. Log new vehicle to the garage").AppendLine()
                 .Append("2. Show all license numbers of vehicle currently in the garage").AppendLine()
-                .Append("3. Update vehicle state").AppendLine().Append("4. Inflate wheels (to maximum)").AppendLine()
-                .Append("5. Fuel vehicle").AppendLine().Append("6. Charge a vehicle").AppendLine()
-                .Append("7. Show full vehicle data").AppendLine().Append("8. Exit garage system")
-                .AppendLine()
+                .Append("3. Update vehicle state").AppendLine()
+                .Append("4. Inflate wheels (to maximum)").AppendLine()
+                .Append("5. Fuel vehicle").AppendLine()
+                .Append("6. Charge a vehicle").AppendLine()
+                .Append("7. Show full vehicle data").AppendLine()
+                .Append("8. Exit garage system").AppendLine()
                 .Append("================================================");
             Console.WriteLine(sb);
         }
@@ -76,9 +78,14 @@ namespace Ex03.ConsoleUI
         public static void ShowPossibleVehicleTypes()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("================================================").AppendLine().Append("1. Motorcycle")
-                .AppendLine().Append("2. Electrical Motorcycle").AppendLine().Append("3. Car").AppendLine()
-                .Append("4. Electrical Car").AppendLine().Append("5. Truck").AppendLine().Append("6. Go back").AppendLine()
+            sb.Append("================================================").AppendLine()
+                .Append("1. Motorcycle")
+                .AppendLine()
+                .Append("2. Electrical Motorcycle").AppendLine()
+                .Append("3. Car").AppendLine()
+                .Append("4. Electrical Car").AppendLine()
+                .Append("5. Truck").AppendLine()
+                .Append("6. Go back").AppendLine()
                 .Append("================================================");
             Console.WriteLine(sb);
         }
@@ -87,15 +94,22 @@ namespace Ex03.ConsoleUI
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("================================================").AppendLine()
-                .Append("1. Red").AppendLine().Append("2. White").AppendLine().Append("3. Black").AppendLine()
-                .Append("4. Silver").AppendLine().Append("5. Go back").AppendLine().Append("================================================");
+                .Append("1. Red").AppendLine()
+                .Append("2. White").AppendLine()
+                .Append("3. Black").AppendLine()
+                .Append("4. Silver").AppendLine()
+                .Append("5. Go back").AppendLine()
+                .Append("================================================");
             Console.WriteLine(sb);
         }
 
         public static void ShowMotorcycleLicenseTypes()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("1. A").AppendLine().Append("2. B1").AppendLine().Append("3. AA").AppendLine().Append("4. BB").AppendLine()
+            sb.Append("1. A").AppendLine()
+                .Append("2. B1").AppendLine()
+                .Append("3. AA").AppendLine()
+                .Append("4. BB").AppendLine()
                 .Append("5. Go back").AppendLine();
             Console.WriteLine(sb);
         }

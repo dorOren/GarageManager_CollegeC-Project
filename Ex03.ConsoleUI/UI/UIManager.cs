@@ -11,15 +11,11 @@ namespace Ex03.ConsoleUI
 {
     public class UIManager
     {
-        private GarageManager m_Garage;
-        private PrintHandler m_PrintHandler;
-        private InputHandler m_InputHandler;
+        private readonly GarageManager m_Garage;
 
         public UIManager()
         {
             m_Garage = new GarageManager();
-            m_PrintHandler = new PrintHandler();
-            m_InputHandler = new InputHandler();
         }
 
         public void Start()
@@ -29,7 +25,7 @@ namespace Ex03.ConsoleUI
             {
                 Menu.ShowMainMenu();
 
-                int chosenOpt = m_InputHandler.GetChosenOptionInMenuFromUser(8);
+                int chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(8);
                 Console.Clear();
                 switch (chosenOpt)
                 {
@@ -58,7 +54,7 @@ namespace Ex03.ConsoleUI
                         runGarage = false;
                         break;
                     default:
-                        m_PrintHandler.IllegalOptionOutput();
+                        PrintHandler.IllegalOptionOutput();
                         break;
 
                 }
@@ -69,15 +65,15 @@ namespace Ex03.ConsoleUI
 
         private void getNewVehicleDetails()
         {
-            m_PrintHandler.AskForLicenseNumber();
-            string licenseNumber = m_InputHandler.GetStringInputFromUser();
+            PrintHandler.AskForLicenseNumber();
+            string licenseNumber = InputHandler.GetStringInputFromUser();
             try
             {
                 if (isVehicleExistsInGarage(licenseNumber))
                 {
                     Console.WriteLine("Log: Vehicle exists in garage");
                     m_Garage.UpdateVehicleStatus(licenseNumber, eVehicleStatus.BeingRepaired);
-                    m_PrintHandler.VehicleIsAlreadyExistsInGarage();
+                    PrintHandler.VehicleIsAlreadyExistsInGarage();
                 }
                 else
                 {
@@ -86,30 +82,30 @@ namespace Ex03.ConsoleUI
                     if (!vehicleType.Equals(eVehicleType.None))
                     {
                         Vehicle vehicle = m_Garage.InitVehicle(vehicleType);
-                        m_PrintHandler.AskForVehicleModel();
-                        string modelName = m_InputHandler.GetStringInputFromUser();
+                        PrintHandler.AskForVehicleModel();
+                        string modelName = InputHandler.GetStringInputFromUser();
                         bool valid = false;
                         float currentWheelAirPressure = 0;
                         while (!valid)
                         {
                             try
                             {
-                                m_PrintHandler.AskForCurrentWheelAirPressure();
-                                currentWheelAirPressure = m_InputHandler.GetFloatInputFromUser();
+                                PrintHandler.AskForCurrentWheelAirPressure();
+                                currentWheelAirPressure = InputHandler.GetFloatInputFromUser();
                                 valid = true;
                             }
                             catch (ArgumentException ex)
                             {
-                                m_PrintHandler.PrintException(ex, ex.Message);
+                                PrintHandler.PrintException(ex, ex.Message);
                             }
                             catch (FormatException ex)
                             {
-                                m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                                PrintHandler.PrintException(ex, "Illegal input entered.");
                             }
                         }
 
-                        m_PrintHandler.AskForWheelManufacturer();
-                        string wheelManufacturer = m_InputHandler.GetStringInputFromUser();
+                        PrintHandler.AskForWheelManufacturer();
+                        string wheelManufacturer = InputHandler.GetStringInputFromUser();
                         if (vehicleType.Equals(eVehicleType.FuelBasedMotorcycle) ||
                             vehicleType.Equals(eVehicleType.ElectricMotorcycle))
                         {
@@ -134,7 +130,7 @@ namespace Ex03.ConsoleUI
             }
             catch(Exception ex)
             {
-                m_PrintHandler.PrintException(ex,ex.Message);
+                PrintHandler.PrintException(ex,ex.Message);
             }
 
         }
@@ -151,18 +147,18 @@ namespace Ex03.ConsoleUI
                 {
                     try
                     {
-                        m_PrintHandler.AskForEngineVolume();
-                        engineVolume = m_InputHandler.GetIntegerInputFromUser();
+                        PrintHandler.AskForEngineVolume();
+                        engineVolume = InputHandler.GetIntegerInputFromUser();
 
                         valid = true;
                     }
                     catch (ArgumentException ex)
                     {
-                        m_PrintHandler.PrintException(ex, ex.Message);
+                        PrintHandler.PrintException(ex, ex.Message);
                     }
                     catch (FormatException ex)
                     {
-                        m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                        PrintHandler.PrintException(ex, "Illegal input entered.");
                     }
                 }
 
@@ -174,17 +170,17 @@ namespace Ex03.ConsoleUI
                     {
                         try
                         {
-                            m_PrintHandler.AskForCurrentFuelAmount();
-                            currentFuelAmount = m_InputHandler.GetFloatInputFromUser();
+                            PrintHandler.AskForCurrentFuelAmount();
+                            currentFuelAmount = InputHandler.GetFloatInputFromUser();
                             valid = true;
                         }
                         catch (ArgumentException ex)
                         {
-                            m_PrintHandler.PrintException(ex, ex.Message);
+                            PrintHandler.PrintException(ex, ex.Message);
                         }
                         catch (FormatException ex)
                         {
-                            m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
                         }
                     }
 
@@ -200,17 +196,17 @@ namespace Ex03.ConsoleUI
                     {
                         try
                         {
-                            m_PrintHandler.AskForCurrentBatteryTime();
-                            currentBatteryTime = m_InputHandler.GetFloatInputFromUser();
+                            PrintHandler.AskForCurrentBatteryTime();
+                            currentBatteryTime = InputHandler.GetFloatInputFromUser();
                             valid = true;
                         }
                         catch (ArgumentException ex)
                         {
-                            m_PrintHandler.PrintException(ex, ex.Message);
+                            PrintHandler.PrintException(ex, ex.Message);
                         }
                         catch (FormatException ex)
                         {
-                            m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
                         }
                     }
 
@@ -238,17 +234,17 @@ namespace Ex03.ConsoleUI
                     {
                         try
                         {
-                            m_PrintHandler.AskForCurrentFuelAmount();
-                            currentFuelAmount = m_InputHandler.GetFloatInputFromUser();
+                            PrintHandler.AskForCurrentFuelAmount();
+                            currentFuelAmount = InputHandler.GetFloatInputFromUser();
                             valid = true;
                         }
                         catch (ArgumentException ex)
                         {
-                            m_PrintHandler.PrintException(ex, ex.Message);
+                            PrintHandler.PrintException(ex, ex.Message);
                         }
                         catch (FormatException ex)
                         {
-                            m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
                         }
                     }
 
@@ -264,17 +260,17 @@ namespace Ex03.ConsoleUI
                     {
                         try
                         {
-                            m_PrintHandler.AskForCurrentBatteryTime();
-                            currentBatteryTime = m_InputHandler.GetFloatInputFromUser();
+                            PrintHandler.AskForCurrentBatteryTime();
+                            currentBatteryTime = InputHandler.GetFloatInputFromUser();
                             valid = true;
                         }
                         catch (ArgumentException ex)
                         {
-                            m_PrintHandler.PrintException(ex, ex.Message);
+                            PrintHandler.PrintException(ex, ex.Message);
                         }
                         catch (FormatException ex)
                         {
-                            m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                            PrintHandler.PrintException(ex, "Illegal input entered.");
                         }
                     }
 
@@ -296,19 +292,19 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    m_PrintHandler.AskForMaxCarryingWeight();
-                    maxCarryingWeight = m_InputHandler.GetFloatInputFromUser();
-                    m_PrintHandler.AskForCurrentFuelAmount();
-                    currentFuelAmount = m_InputHandler.GetFloatInputFromUser();
+                    PrintHandler.AskForMaxCarryingWeight();
+                    maxCarryingWeight = InputHandler.GetFloatInputFromUser();
+                    PrintHandler.AskForCurrentFuelAmount();
+                    currentFuelAmount = InputHandler.GetFloatInputFromUser();
                     valid = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
             }
 
@@ -320,14 +316,14 @@ namespace Ex03.ConsoleUI
 
         private void getCustomerDetails(string i_LicenseNumber)
         {
-            m_PrintHandler.AskForOwnerName();
-            string ownerName = m_InputHandler.GetStringInputFromUser();
+            PrintHandler.AskForOwnerName();
+            string ownerName = InputHandler.GetStringInputFromUser();
             bool valid = false;
             string ownerPhone = "\0";
             while (!valid)
             {
-                m_PrintHandler.AskForOwnerPhone();
-                ownerPhone = m_InputHandler.GetStringInputFromUser();
+                PrintHandler.AskForOwnerPhone();
+                ownerPhone = InputHandler.GetStringInputFromUser();
                 valid = (int.TryParse(ownerPhone, out int temp) && (ownerPhone.Length > 7) && (ownerPhone.Length < 11));
             }
 
@@ -336,8 +332,8 @@ namespace Ex03.ConsoleUI
 
         private bool isTruckCarryingDangerousCargo()
         {
-            m_PrintHandler.AskIfTruckIsCarryingDangerousCargo();
-            bool res = m_InputHandler.GetBooleanInputFromUser();
+            PrintHandler.AskIfTruckIsCarryingDangerousCargo();
+            bool res = InputHandler.GetBooleanInputFromUser();
             return res;
         }
 
@@ -363,20 +359,20 @@ namespace Ex03.ConsoleUI
                 int chosenType;
                 try
                 {
-                    m_PrintHandler.AskForMotorcycleLicenseType();
+                    PrintHandler.AskForMotorcycleLicenseType();
                     Menu.ShowMotorcycleLicenseTypes();
-                    chosenType = m_InputHandler.GetChosenOptionInMenuFromUser(5);
+                    chosenType = InputHandler.GetChosenOptionInMenuFromUser(5);
                     if (chosenType == 5) break;
                     resLicenseType = (eLicenseType)chosenType;
                     closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
             }
 
@@ -392,17 +388,17 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    m_PrintHandler.AskForNumberOfDoors();
-                    res = m_InputHandler.GetIntegerInputFromUser();
+                    PrintHandler.AskForNumberOfDoors();
+                    res = InputHandler.GetIntegerInputFromUser();
                     valid = res >= 2 && res <= 5;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
             }
 
@@ -418,20 +414,20 @@ namespace Ex03.ConsoleUI
                 int chosenOpt;
                 try
                 {
-                    m_PrintHandler.AskForColor();
+                    PrintHandler.AskForColor();
                     Menu.ShowColorsOptionsForCars();
-                    chosenOpt = m_InputHandler.GetChosenOptionInMenuFromUser(5);
+                    chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(5);
                     if (chosenOpt == 5) break;
                     resColor = (eColor)chosenOpt;
                     closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
             }
 
@@ -447,20 +443,20 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    m_PrintHandler.AskToChooseVehicleType();
+                    PrintHandler.AskToChooseVehicleType();
                     Menu.ShowPossibleVehicleTypes();
-                    int chosenVehicleOpt = m_InputHandler.GetChosenOptionInMenuFromUser(6);
+                    int chosenVehicleOpt = InputHandler.GetChosenOptionInMenuFromUser(6);
                     if (chosenVehicleOpt == 6) break;
                     chosenTypeResult = (eVehicleType) chosenVehicleOpt;
                     closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
             }
 
@@ -469,38 +465,38 @@ namespace Ex03.ConsoleUI
 
         private void ShowFullVehicleData()
         {
-            m_PrintHandler.AskForLicenseNumber();
-            string i_LicenseNumber = m_InputHandler.GetStringInputFromUser();
+            PrintHandler.AskForLicenseNumber();
+            string i_LicenseNumber = InputHandler.GetStringInputFromUser();
             StringBuilder vehicleDetails = m_Garage.ShowVehicleData(i_LicenseNumber);
 
-            m_PrintHandler.PrintVehicleDetails(vehicleDetails);
+            PrintHandler.PrintVehicleDetails(vehicleDetails);
         }
 
         private void chargeElectricVehicle()
         {
-            m_PrintHandler.AskForLicenseNumber();
-            string inputLicenseNumber = m_InputHandler.GetStringInputFromUser();
+            PrintHandler.AskForLicenseNumber();
+            string inputLicenseNumber = InputHandler.GetStringInputFromUser();
             bool closeMenu = false;
             while (!closeMenu)
             {
                 try
                 {
-                    m_PrintHandler.AskForAmountOfBatteryInMinutesToCharge();
-                    int amountOfBatteryTimeToAdd = m_InputHandler.GetIntegerInputFromUser();
+                    PrintHandler.AskForAmountOfBatteryInMinutesToCharge();
+                    int amountOfBatteryTimeToAdd = InputHandler.GetIntegerInputFromUser();
                     m_Garage.ChargeBattery(inputLicenseNumber, amountOfBatteryTimeToAdd);
                     closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
                 catch (ValueOutOfRangeException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
             }
         }
@@ -513,9 +509,9 @@ namespace Ex03.ConsoleUI
 
             while (!closeMenu)
             {
-                m_PrintHandler.AskForLicenseNumber();
-                inputLicenseNumber = m_InputHandler.GetStringInputFromUser();
-                m_PrintHandler.AskToChooseFuelType();
+                PrintHandler.AskForLicenseNumber();
+                inputLicenseNumber = InputHandler.GetStringInputFromUser();
+                PrintHandler.AskToChooseFuelType();
                 chosenFuelType = getFuelTypeAndConvertToEnum();
                 if (!chosenFuelType.Equals(eFuelType.None))
                 {
@@ -527,22 +523,22 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    m_PrintHandler.AskForFuelingAmount();
-                    float amountToFuel = m_InputHandler.GetFloatInputFromUser();
+                    PrintHandler.AskForFuelingAmount();
+                    float amountToFuel = InputHandler.GetFloatInputFromUser();
                     m_Garage.FuelVehicle(inputLicenseNumber, chosenFuelType, amountToFuel);
                     closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
                 catch (ValueOutOfRangeException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
             }
         }
@@ -557,17 +553,17 @@ namespace Ex03.ConsoleUI
                 try
                 {
                     Menu.ShowFuelTypes();
-                    chosenFuelType = m_InputHandler.GetChosenOptionInMenuFromUser(5);
+                    chosenFuelType = InputHandler.GetChosenOptionInMenuFromUser(5);
                     typeResult = (eFuelType) chosenFuelType;
                     closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                    PrintHandler.PrintException(ex, "Illegal input entered.");
                 }
             }
 
@@ -577,15 +573,15 @@ namespace Ex03.ConsoleUI
 
         private void inflateWheels()
         {
-            m_PrintHandler.AskForLicenseNumber();
-            string inputLicenseNumber = m_InputHandler.GetStringInputFromUser();
+            PrintHandler.AskForLicenseNumber();
+            string inputLicenseNumber = InputHandler.GetStringInputFromUser();
             try
             {
                 m_Garage.InflateToMax(inputLicenseNumber);
             }
             catch (ArgumentException ex)
             {
-                m_PrintHandler.PrintException(ex, ex.Message);
+                PrintHandler.PrintException(ex, ex.Message);
             }
 
         }
@@ -596,32 +592,32 @@ namespace Ex03.ConsoleUI
             bool closeMenu = false;
             while (!closeMenu)
             {
-                m_PrintHandler.AskForLicenseNumber();
-                string inputLicenseNumber = m_InputHandler.GetStringInputFromUser();
+                PrintHandler.AskForLicenseNumber();
+                string inputLicenseNumber = InputHandler.GetStringInputFromUser();
                 if (isVehicleExistsInGarage(inputLicenseNumber))
                 {
                     try
                     {
 
-                        m_PrintHandler.AskForVehicleStatus();
+                        PrintHandler.AskForVehicleStatus();
                         Menu.ShowUpdatingOptionsByVehicleStatusMenu();
-                        int statusChosen = m_InputHandler.GetChosenOptionInMenuFromUser(4);
+                        int statusChosen = InputHandler.GetChosenOptionInMenuFromUser(4);
                         if (statusChosen == 4) break;
                         m_Garage.UpdateVehicleStatus(inputLicenseNumber, (eVehicleStatus) statusChosen);
                         closeMenu = true;
                     }
                     catch (ArgumentException ex)
                     {
-                        m_PrintHandler.PrintException(ex, ex.Message);
+                        PrintHandler.PrintException(ex, ex.Message);
                     }
                     catch (FormatException ex)
                     {
-                        m_PrintHandler.PrintException(ex, "Illegal input entered.");
+                        PrintHandler.PrintException(ex, "Illegal input entered.");
                     }
                 }
                 else
                 {
-                    m_PrintHandler.NoMatchingVehiclesInGarage();
+                    PrintHandler.NoMatchingVehiclesInGarage();
                 }
 
             }
@@ -639,7 +635,7 @@ namespace Ex03.ConsoleUI
                 Menu.ShowFilteringOptionsByVehicleStatusMenu();
                 try
                 {
-                    chosenOpt = m_InputHandler.GetChosenOptionInMenuFromUser(5);
+                    chosenOpt = InputHandler.GetChosenOptionInMenuFromUser(5);
                     if (chosenOpt == 5) break;
                     List<string> resLicenses = new List<string>();
                     resLicenses = m_Garage.ShowAllVehiclesUnderCare((eVehicleStatus)chosenOpt);
@@ -648,22 +644,22 @@ namespace Ex03.ConsoleUI
                     {
                         Console.Clear();
                         Menu.ShowFilteringOptionsByVehicleStatusMenu();
-                        m_PrintHandler.PrintList(resLicenses);
+                        PrintHandler.PrintList(resLicenses);
                     }
                     else
                     {
-                        m_PrintHandler.NoMatchingVehiclesInGarage();
+                        PrintHandler.NoMatchingVehiclesInGarage();
                     }
 
                     closeMenu = true;
                 }
                 catch (ArgumentException ex)
                 {
-                    m_PrintHandler.PrintException(ex, ex.Message);
+                    PrintHandler.PrintException(ex, ex.Message);
                 }
                 catch (FormatException ex)
                 {
-                    m_PrintHandler.PrintException(ex, "Illegal input entered");
+                    PrintHandler.PrintException(ex, "Illegal input entered");
                 }
 
             }
